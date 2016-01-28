@@ -1,7 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 
-module.exports = {
+module.exports = [{
+  name: 'js',
   entry: './js/main.jsx',
   output: { path: './js/', filename: 'bundle.js' },
   module: {
@@ -15,5 +16,23 @@ module.exports = {
         }
       }
     ]
-  },
-};
+   }
+}];
+//   },
+//   {
+//   name: 'css',
+//   entry: {
+//     styles: [
+//      './styles/main.scss'
+//    ]
+//  },
+//  output: { path: './styles/', filename: 'main.css' },
+//  module: {
+//      loaders: [
+//         {
+//          test: /\.scss$/,
+//          loader:
+//        }
+//      ]
+//     }
+// }

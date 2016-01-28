@@ -2,7 +2,9 @@ import { combineReducers } from 'redux'
 import R from 'ramda'
 
 const initialGame = {
-  content: ['']
+  score: 0,
+  content: [''],
+  
 }
 
 const games = (state = initialGame, action) => {
