@@ -34,6 +34,7 @@ body {
   border-bottom: none;
 }
 .game .word-wrapper .word {
+  font-size: 2rem;
   text-align: center;
 }
 .game .shooter-wrapper {
@@ -41,8 +42,14 @@ body {
   margin: 0 0 50px 0;
 }
 .game .shooter-wrapper input {
+  border: 1px solid black;
   width: 100%;
+  padding: 10px;
+  font-size: 1.8rem;
   text-align: center;
+}
+.game .shooter-wrapper input:focus {
+  outline: none;
 }
 
 .scores-wrapper {
@@ -53,9 +60,14 @@ body {
   text-align: center;
 }
 .scores-wrapper .leaderboard {
+  width: 100%;
   margin: 50px 0 0 0;
+  border: 1px solid #34495e;
+  border-top: none;
+  display: inline-block;
 }
 .scores-wrapper .leaderboard h4 {
+  margin: 0;
   font-size: 2.4rem;
   line-height: 4rem;
   color: white;
@@ -66,10 +78,11 @@ body {
   display: inline-block;
   width: 100%;
   font-size: 2rem;
-  line-height: 2rem;
+  line-height: 3rem;
+  float: left;
 }
 .scores-wrapper .leaderboard .score .player {
-  line-height: 2rem;
+  line-height: 3rem;
   font-size: 1.6rem;
 }
 .scores-wrapper .leaderboard .score:nth-child(2n+1) {
@@ -83,6 +96,9 @@ body {
   display: block;
 }
 .new-game:hover {
+  color: white;
+}
+.new-game:focus {
   color: white;
 }
 

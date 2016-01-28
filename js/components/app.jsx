@@ -34,6 +34,7 @@ class App extends Component {
       type: 'NEW_GAME',
       content: fakeGame
     })
+    document.getElementById('shooter').focus()
   }
   completeWord() {
     const { store } = this.props
@@ -51,7 +52,9 @@ class App extends Component {
       <div className="container">
         <Game game={game} completeWord={this.completeWord.bind(this)}/>
         <div className="row">
-          <button className="new-game btn" onClick={this.newGame.bind(this)}>Get Game</button>
+          <div className="col-md-8">
+            <button className="new-game btn btn-lg" onClick={this.newGame.bind(this)}>New Game</button>
+          </div>
         </div>
       </div>
     </div>

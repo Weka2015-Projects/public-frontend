@@ -35,6 +35,7 @@ body {
     border: 1px solid black;
     border-bottom: none;
     .word {
+      font-size: 2rem;
       text-align: center;
     }
   }
@@ -42,8 +43,14 @@ body {
     width: 100%;
     margin: 0 0 50px 0;
     input {
+      border: 1px solid black;
       width:100%;
-      text-align: center
+      padding: 10px;
+      font-size: 1.8rem;
+      text-align: center;
+      &:focus{
+        outline:none;
+      }
     }
   }
 
@@ -57,22 +64,27 @@ body {
     text-align: center;
   }
   .leaderboard {
+    width: 100%;
     margin: 50px 0 0 0;
+    border: 1px solid $greyBlue;
+    border-top: none;
+    display: inline-block;
     h4 {
+      margin: 0;
       font-size: 2.4rem;
       line-height: 4rem;
       color: white;
       background: $greyBlue;
-
       text-align: center;
     }
     .score {
       display: inline-block;
       width: 100%;
       font-size: 2rem;
-      line-height: 2rem;
+      line-height: 3rem;
+      float: left;
       .player {
-        line-height: 2rem;
+        line-height: 3rem;
         font-size: 1.6rem;
       }
       &:nth-child(2n+1) {
@@ -89,6 +101,9 @@ body {
   color: white;
   display: block;
   &:hover {
+    color: white;
+  }
+  &:focus {
     color: white;
   }
 }

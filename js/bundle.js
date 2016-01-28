@@ -19774,6 +19774,7 @@
 	        type: 'NEW_GAME',
 	        content: fakeGame
 	      });
+	      document.getElementById('shooter').focus();
 	    }
 	  }, {
 	    key: 'completeWord',
@@ -19803,9 +19804,13 @@
 	            'div',
 	            { className: 'row' },
 	            _react2.default.createElement(
-	              'button',
-	              { className: 'new-game btn', onClick: this.newGame.bind(this) },
-	              'Get Game'
+	              'div',
+	              { className: 'col-md-8' },
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'new-game btn btn-lg', onClick: this.newGame.bind(this) },
+	                'New Game'
+	              )
 	            )
 	          )
 	        )
@@ -19937,6 +19942,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _ramda = __webpack_require__(186);
+
+	var _ramda2 = _interopRequireDefault(_ramda);
+
 	var _highscore = __webpack_require__(188);
 
 	var _highscore2 = _interopRequireDefault(_highscore);
@@ -19959,10 +19968,19 @@
 	  }
 
 	  _createClass(Leaderboard, [{
-	    key: 'render',
-	    value: function render() {
+	    key: 'sortScores',
+	    value: function sortScores() {
 	      var plays = this.props.plays;
 
+	      var mostRecent = _ramda2.default.sort(function (a, b) {
+	        return b.score - a.score;
+	      }, plays);
+	      return mostRecent;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var plays = this.sortScores();
 	      var leaders = [];
 	      plays.map(function (play) {
 	        leaders.push(_react2.default.createElement(_highscore2.default, { score: play.score, player: play.name, key: play.player_id }));
@@ -29878,7 +29896,7 @@
 	      return _react2.default.createElement(
 	        'form',
 	        { onSubmit: this.handleSubmit.bind(this) },
-	        _react2.default.createElement('input', { placeholder: 'Type the word and hit enter to kill it', ref: 'shot' })
+	        _react2.default.createElement('input', { id: 'shooter', placeholder: 'Type the word and hit enter to kill it', ref: 'shot' })
 	      );
 	    }
 	  }]);
