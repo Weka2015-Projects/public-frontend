@@ -19782,8 +19782,7 @@
 	      var words = store.getState().games.content;
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        store.getState().games.content,
+	        { className: 'container' },
 	        _react2.default.createElement(_game2.default, { words: words, completeWord: this.completeWord.bind(this) }),
 	        _react2.default.createElement(
 	          'button',
@@ -19864,9 +19863,17 @@
 
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        _react2.default.createElement(_word2.default, { content: words[0] }),
-	        _react2.default.createElement(_textshooter2.default, { checkWord: this.checkWord.bind(this) })
+	        { className: 'game' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'word-wrapper' },
+	          _react2.default.createElement(_word2.default, { content: words[0] })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'shooter-wrapper' },
+	          _react2.default.createElement(_textshooter2.default, { checkWord: this.checkWord.bind(this) })
+	        )
 	      );
 	    }
 	  }]);
@@ -19970,7 +19977,7 @@
 /* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -20000,14 +20007,14 @@
 	  }
 
 	  _createClass(Word, [{
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
-	      var word = this.props.word;
+	      var content = this.props.content;
 
 	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        word
+	        "div",
+	        { id: "active", className: "word" },
+	        content
 	      );
 	    }
 	  }]);
@@ -29767,7 +29774,7 @@
 	      return _react2.default.createElement(
 	        'form',
 	        { onSubmit: this.handleSubmit.bind(this) },
-	        _react2.default.createElement('input', { placeholder: 'type faster!', ref: 'shot' })
+	        _react2.default.createElement('input', { placeholder: 'Type the word and hit enter to kill it', ref: 'shot' })
 	      );
 	    }
 	  }]);

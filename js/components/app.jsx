@@ -30,11 +30,9 @@ class App extends Component {
     const { store } = this.props
     const words = store.getState().games.content
     return(
-      <div>
-        {store.getState().games.content}
+      <div className="container">
         <Game words={words} completeWord={this.completeWord.bind(this)}/>
         <button onClick={this.newGame.bind(this)}>Get Game</button>
-
       </div>
     )
   }

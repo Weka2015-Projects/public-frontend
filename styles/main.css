@@ -1,0 +1,22 @@
+.game {
+  margin: 50px 0 0 0;
+  width: 500px;
+}
+
+.word-wrapper {
+  width: 100%;
+  height: 400px;
+  padding: 5px;
+  border: 1px solid black;
+  border-bottom: none;
+}
+
+.shooter-wrapper {
+  width: 100%;
+  margin: 0 0 50px 0;
+}
+
+.shooter-wrapper input{
+  width:100%;
+  text-align: center
+}

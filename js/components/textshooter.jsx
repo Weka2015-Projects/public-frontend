@@ -16,7 +16,7 @@ class Textshooter extends Component {
   render() {
     return(
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <input placeholder="type faster!" ref="shot"/>
+        <input placeholder="Type the word and hit enter to kill it" ref="shot"/>
       </form>
     )
   }

@@ -18,9 +18,13 @@ class Game extends Component {
   render() {
     const { words } = this.props
     return(
-      <div>
-        <Word content={words[0]}/>
-        <Textshooter checkWord={this.checkWord.bind(this)}/>
+      <div className="game">
+        <div className="word-wrapper">
+          <Word content={words[0]}/>
+        </div>
+        <div className="shooter-wrapper">
+          <Textshooter checkWord={this.checkWord.bind(this)}/>
+        </div>
       </div>
     )
   }

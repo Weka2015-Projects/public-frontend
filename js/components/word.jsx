@@ -6,10 +6,10 @@ class Word extends Component {
   }
 
   render() {
-    const { word } = this.props
+    const { content } = this.props
     return(
-      <div>
-        {word}
+      <div id="active" className="word">
+        {content}
       </div>
     )
   }
