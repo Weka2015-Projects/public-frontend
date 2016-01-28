@@ -14,7 +14,18 @@ class App extends Component {
       content : 'bubba chubba lubba dubb dubb suckit fill im making this up sucker',
       plays: [{
         player_id: 1,
+        name: 'Jimbob',
         score: 10
+      },
+      {
+        player_id: 2,
+        name: 'Nilu the Destroyer',
+        score: 5
+      },
+      {
+        player_id: 3,
+        name: 'Chompy',
+        score: 100
       }],
       score: 0
     }
@@ -39,7 +50,9 @@ class App extends Component {
       <Nav />
       <div className="container">
         <Game game={game} completeWord={this.completeWord.bind(this)}/>
-        <button onClick={this.newGame.bind(this)}>Get Game</button>
+        <div className="row">
+          <button className="new-game btn" onClick={this.newGame.bind(this)}>Get Game</button>
+        </div>
       </div>
     </div>
     )

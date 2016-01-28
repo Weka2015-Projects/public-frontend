@@ -5,8 +5,7 @@ const initialGame = {
   score: 0,
   content: [''],
   plays: [{
-    player_id: 1,
-    score: 10
+  
   }]
 }
 

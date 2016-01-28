@@ -5,12 +5,12 @@ class Highscore extends Component {
     super(props)
   }
   render() {
-    const {player, score } = this.props
+    const { player, score } = this.props
 
     return(
-      <div>
-        {score}
-        <span>{player}</span>
+      <div className="score">
+        <span className="points col-xs-3">{score}</span>
+        <span className="player col-xs-9">{player}</span>
       </div>
     )
   }

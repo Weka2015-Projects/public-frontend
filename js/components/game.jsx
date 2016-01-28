@@ -20,18 +20,20 @@ class Game extends Component {
     const { game } = this.props
 
     return(
-      <div className="game">
-        <div className="game-wrapper">
-          <div className="word-wrapper">
-            <Word content={game.content[0]}/>
+      <div className="row">
+        <div className="game col-md-12">
+          <div className="game-wrapper col-md-8">
+            <div className="word-wrapper">
+              <Word content={game.content[0]}/>
+            </div>
+            <div className="shooter-wrapper">
+              <Textshooter checkWord={this.checkWord.bind(this)}/>
+            </div>
           </div>
-          <div className="shooter-wrapper">
-            <Textshooter checkWord={this.checkWord.bind(this)}/>
+          <div className="scores-wrapper col-md-4">
+              <Score score={game.score}/>
+              <Leaderboard plays={game.plays}/>
           </div>
-        </div>
-        <div className="scores-wrapper">
-            <Score score={game.score}/>
-            <Leaderboard plays={game.plays}/>
         </div>
       </div>
     )

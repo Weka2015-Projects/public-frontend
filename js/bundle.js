@@ -19756,7 +19756,16 @@
 	        content: 'bubba chubba lubba dubb dubb suckit fill im making this up sucker',
 	        plays: [{
 	          player_id: 1,
+	          name: 'Jimbob',
 	          score: 10
+	        }, {
+	          player_id: 2,
+	          name: 'Nilu the Destroyer',
+	          score: 5
+	        }, {
+	          player_id: 3,
+	          name: 'Chompy',
+	          score: 100
 	        }],
 	        score: 0
 	      };
@@ -19791,9 +19800,13 @@
 	          { className: 'container' },
 	          _react2.default.createElement(_game2.default, { game: game, completeWord: this.completeWord.bind(this) }),
 	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.newGame.bind(this) },
-	            'Get Game'
+	            'div',
+	            { className: 'row' },
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'new-game btn', onClick: this.newGame.bind(this) },
+	              'Get Game'
+	            )
 	          )
 	        )
 	      );
@@ -19874,26 +19887,30 @@
 
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'game' },
+	        { className: 'row' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'game-wrapper' },
+	          { className: 'game col-md-12' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'word-wrapper' },
-	            _react2.default.createElement(_word2.default, { content: game.content[0] })
+	            { className: 'game-wrapper col-md-8' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'word-wrapper' },
+	              _react2.default.createElement(_word2.default, { content: game.content[0] })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'shooter-wrapper' },
+	              _react2.default.createElement(_textshooter2.default, { checkWord: this.checkWord.bind(this) })
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'shooter-wrapper' },
-	            _react2.default.createElement(_textshooter2.default, { checkWord: this.checkWord.bind(this) })
+	            { className: 'scores-wrapper col-md-4' },
+	            _react2.default.createElement(_score2.default, { score: game.score }),
+	            _react2.default.createElement(_leaderboard2.default, { plays: game.plays })
 	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'scores-wrapper' },
-	          _react2.default.createElement(_score2.default, { score: game.score }),
-	          _react2.default.createElement(_leaderboard2.default, { plays: game.plays })
 	        )
 	      );
 	    }
@@ -19948,11 +19965,16 @@
 
 	      var leaders = [];
 	      plays.map(function (play) {
-	        leaders.push(_react2.default.createElement(_highscore2.default, { score: play.score, player: play.player_id, key: play.player_id }));
+	        leaders.push(_react2.default.createElement(_highscore2.default, { score: play.score, player: play.name, key: play.player_id }));
 	      });
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'leaderboard' },
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          'Highscores'
+	        ),
 	        leaders
 	      );
 	    }
@@ -20008,13 +20030,17 @@
 	        { className: 'navbar' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'site-title' },
-	          'Text invaders'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'navigation' },
-	          _react2.default.createElement(_login2.default, null)
+	          { className: 'container' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'site-title' },
+	            'Text invaders'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'navigation' },
+	            _react2.default.createElement(_login2.default, null)
+	          )
 	        )
 	      );
 	    }
@@ -20080,7 +20106,7 @@
 /* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -20110,13 +20136,13 @@
 	  }
 
 	  _createClass(Score, [{
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      var score = this.props.score;
 
 	      return _react2.default.createElement(
-	        'div',
-	        null,
+	        "div",
+	        { className: "current-score" },
 	        score
 	      );
 	    }
@@ -21307,10 +21333,7 @@
 	var initialGame = {
 	  score: 0,
 	  content: [''],
-	  plays: [{
-	    player_id: 1,
-	    score: 10
-	  }]
+	  plays: [{}]
 	};
 
 	var initialUser = {
@@ -29869,7 +29892,7 @@
 /* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -29899,19 +29922,23 @@
 	  }
 
 	  _createClass(Highscore, [{
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      var _props = this.props;
 	      var player = _props.player;
 	      var score = _props.score;
 
 	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        score,
+	        "div",
+	        { className: "score" },
 	        _react2.default.createElement(
-	          'span',
-	          null,
+	          "span",
+	          { className: "points col-xs-3" },
+	          score
+	        ),
+	        _react2.default.createElement(
+	          "span",
+	          { className: "player col-xs-9" },
 	          player
 	        )
 	      );

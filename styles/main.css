@@ -1,22 +1,89 @@
-.game {
-  margin: 50px 0 0 0;
-  width: 500px;
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300);
+body {
+  font-family: 'Open Sans', sans-serif;
 }
 
-.word-wrapper {
+.navbar {
+  background: #34495e;
+  border-radius: none;
+}
+.navbar .container {
+  padding: 15px;
+}
+.navbar .container .site-title {
+  font-size: 2rem;
+  line-height: 2rem;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+.navbar .container .navigation {
+  line-height: 2rem;
+}
+
+.game {
+  margin: 50px 0 0 0;
+  width: 100%;
+}
+.game .word-wrapper {
   width: 100%;
   height: 400px;
   padding: 5px;
   border: 1px solid black;
   border-bottom: none;
 }
-
-.shooter-wrapper {
+.game .word-wrapper .word {
+  text-align: center;
+}
+.game .shooter-wrapper {
   width: 100%;
   margin: 0 0 50px 0;
 }
-
-.shooter-wrapper input{
-  width:100%;
-  text-align: center
+.game .shooter-wrapper input {
+  width: 100%;
+  text-align: center;
 }
+
+.scores-wrapper {
+  padding: 25px;
+}
+.scores-wrapper .current-score {
+  font-size: 4rem;
+  text-align: center;
+}
+.scores-wrapper .leaderboard {
+  margin: 50px 0 0 0;
+}
+.scores-wrapper .leaderboard h4 {
+  font-size: 2.4rem;
+  line-height: 4rem;
+  color: white;
+  background: #34495e;
+  text-align: center;
+}
+.scores-wrapper .leaderboard .score {
+  display: inline-block;
+  width: 100%;
+  font-size: 2rem;
+  line-height: 2rem;
+}
+.scores-wrapper .leaderboard .score .player {
+  line-height: 2rem;
+  font-size: 1.6rem;
+}
+.scores-wrapper .leaderboard .score:nth-child(2n+1) {
+  background-color: #eee;
+}
+
+.new-game {
+  margin: auto;
+  background: #34495e;
+  color: white;
+  display: block;
+}
+.new-game:hover {
+  color: white;
+}
+
+/*# sourceMappingURL=main.css.map */

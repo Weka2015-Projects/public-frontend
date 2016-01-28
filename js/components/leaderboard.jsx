@@ -9,10 +9,11 @@ class Leaderboard extends Component {
     const { plays } = this.props
     let leaders = []
     plays.map((play) => {
-      leaders.push(<Highscore score={play.score} player={play.player_id} key={play.player_id}/>)
+      leaders.push(<Highscore score={play.score} player={play.name} key={play.player_id}/>)
     })
     return(
       <div className="leaderboard">
+        <h4>Highscores</h4>
         {leaders}
       </div>
     )

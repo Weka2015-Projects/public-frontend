@@ -8,11 +8,13 @@ class Nav extends Component {
   render() {
     return(
       <div className="navbar">
-        <div className="site-title">
-          Text invaders
-        </div>
-        <div className="navigation">
-          <Login />
+        <div className="container">
+          <div className="site-title">
+            Text invaders
+          </div>
+          <div className="navigation">
+            <Login />
+          </div>
         </div>
       </div>
     )

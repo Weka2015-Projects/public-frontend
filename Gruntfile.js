@@ -7,6 +7,15 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     // Configure a mochaTest task
+        watch: {
+          scripts: {
+            files: '**/*.scss',
+            tasks: ['sass'],
+            options: {
+              interrupt: true,
+            },
+        },
+    },
     sass: {
        dist: {
          options: {
@@ -19,6 +28,6 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('default', ['sass']);
+  grunt.registerTask('default', ['sass', 'watch']);
 
 };
