@@ -4,10 +4,12 @@ class Word extends Component {
   constructor (props) {
     super(props)
   }
+
   render() {
+    const { word } = this.props
     return(
       <div>
-        
+        {word}
       </div>
     )
   }

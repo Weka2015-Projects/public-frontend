@@ -1,8 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
-import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import  textInvaders from './reducers/textinvaders.js'
 import App from './components/app.jsx'
 
+const mountNode = document.getElementById('app')
 
 class Main extends Component {
   constructor (props) {
@@ -11,8 +14,20 @@ class Main extends Component {
   render() {
     return(
       <div>
-        
+        <App store={this.props.store} />
       </div>
     )
   }
 }
+
+
+const store = createStore(textInvaders)
+
+const render = () => {
+  ReactDOM.render(
+      <Main store={store}/>
+, mountNode)
+}
+
+store.subscribe(render)
+render()
