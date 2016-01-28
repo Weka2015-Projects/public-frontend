@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Game from './game.jsx'
-import Leaderboard from './leaderboard.jsx'
 import Nav from './nav.jsx'
 
 
@@ -12,7 +11,12 @@ class App extends Component {
     const { store } = this.props
     const fakeGame = {
       id: 0,
-      content : 'bubba chubba lubba dubb dubb suckit fill im making this up sucker'
+      content : 'bubba chubba lubba dubb dubb suckit fill im making this up sucker',
+      plays: [{
+        player_id: 1,
+        score: 10
+      }],
+      score: 0
     }
     fakeGame.content = fakeGame.content.split(' ')
     store.dispatch({
@@ -28,13 +32,13 @@ class App extends Component {
   }
   render() {
     const { store } = this.props
-    const words = store.getState().games.content
+    const state = store.getState()
+    const game = state.games
     return(
     <div className="app">
       <Nav />
       <div className="container">
-        <Game words={words} completeWord={this.completeWord.bind(this)}/>
-        <Leaderboard />
+        <Game game={game} completeWord={this.completeWord.bind(this)}/>
         <button onClick={this.newGame.bind(this)}>Get Game</button>
       </div>
     </div>

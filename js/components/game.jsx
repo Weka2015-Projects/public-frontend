@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Word from './word.jsx'
 import Score from './score.jsx'
+import Leaderboard from './leaderboard.jsx'
 import Textshooter from './textshooter.jsx'
 
 class Game extends Component {
@@ -8,22 +9,29 @@ class Game extends Component {
     super(props)
   }
   checkWord (word) {
-    const { words, completeWord } = this.props
-    if(word === words[0]) {
+    const { game, completeWord } = this.props
+    if(word === game.content[0]) {
       completeWord()
     } else {
       return
     }
   }
   render() {
-    const { words } = this.props
+    const { game } = this.props
+
     return(
       <div className="game">
-        <div className="word-wrapper">
-          <Word content={words[0]}/>
+        <div className="game-wrapper">
+          <div className="word-wrapper">
+            <Word content={game.content[0]}/>
+          </div>
+          <div className="shooter-wrapper">
+            <Textshooter checkWord={this.checkWord.bind(this)}/>
+          </div>
         </div>
-        <div className="shooter-wrapper">
-          <Textshooter checkWord={this.checkWord.bind(this)}/>
+        <div className="scores-wrapper">
+            <Score score={game.score}/>
+            <Leaderboard plays={game.plays}/>
         </div>
       </div>
     )

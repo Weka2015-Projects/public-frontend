@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Login from './login.jsx'
 
 class Nav extends Component {
   constructor (props) {
@@ -6,8 +7,13 @@ class Nav extends Component {
   }
   render() {
     return(
-      <div>
-        
+      <div className="navbar">
+        <div className="site-title">
+          Text invaders
+        </div>
+        <div className="navigation">
+          <Login />
+        </div>
       </div>
     )
   }

@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
 
-class Score extends Component {
+class Highscore extends Component {
   constructor (props) {
     super(props)
   }
   render() {
-    const { score } = this.props
+    const {player, score } = this.props
+
     return(
       <div>
         {score}
+        <span>{player}</span>
       </div>
     )
   }
 }
 
-export default Score
+export default Highscore
