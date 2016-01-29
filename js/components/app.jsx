@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Game from './game.jsx'
 import Nav from './nav.jsx'
-
+import request from 'superagent'
 
 class App extends Component {
   constructor (props) {
@@ -10,6 +10,10 @@ class App extends Component {
 
   newGame() {
     const { store } = this.props
+    request.get('http://localhost:4000/games').end((err, res) => {
+      if (err) { console.log(err)}
+      console.log(res)
+    })
     const fakeGame = {
       id: 1,
       content : 'bubba chubba lubba dubb dubb suckit fill im making this up sucker',
