@@ -7,10 +7,11 @@ class App extends Component {
   constructor (props) {
     super(props)
   }
+
   newGame() {
     const { store } = this.props
     const fakeGame = {
-      id: 0,
+      id: 1,
       content : 'bubba chubba lubba dubb dubb suckit fill im making this up sucker',
       plays: [{
         player_id: 1,
@@ -27,14 +28,21 @@ class App extends Component {
         name: 'Chompy',
         score: 100
       }],
-      score: 0
+      score: 0,
+      activeWords: [
+        {
+          content:'',
+          y: 0,
+          x: 0,
+          time: 0
+        }
+      ]
     }
     fakeGame.content = fakeGame.content.split(' ')
     store.dispatch({
       type: 'NEW_GAME',
       content: fakeGame
     })
-    document.getElementById('shooter').focus()
   }
   completeWord() {
     const { store } = this.props
@@ -42,10 +50,19 @@ class App extends Component {
       type: 'COMPLETE_WORD'
     })
   }
+  startGame() {
+    const { store } = this.props
+    store.dispatch({
+      type: 'START_GAME'
+    })
+    document.getElementById('shooter').focus()
+
+  }
   render() {
     const { store } = this.props
     const state = store.getState()
     const game = state.games
+
     return(
     <div className="app">
       <Nav />
@@ -53,7 +70,8 @@ class App extends Component {
         <Game game={game} completeWord={this.completeWord.bind(this)}/>
         <div className="row">
           <div className="col-md-8">
-            <button className="new-game btn btn-lg" onClick={this.newGame.bind(this)}>New Game</button>
+            { game.id === 0 || game.activeWords[0].content || game.content.length === 0 ? <button className="new-game btn btn-lg" onClick={this.newGame.bind(this)}>New Game</button> :
+            <button className="start-game btn btn-lg" onClick={this.startGame.bind(this)}>Start Game</button> }
           </div>
         </div>
       </div>

@@ -9367,6 +9367,7 @@
 	 */
 	var EventInterface = {
 	  type: null,
+	  target: null,
 	  // currentTarget is set when dispatching; no use in copying it here
 	  currentTarget: emptyFunction.thatReturnsNull,
 	  eventPhase: null,
@@ -9400,8 +9401,6 @@
 	  this.dispatchConfig = dispatchConfig;
 	  this.dispatchMarker = dispatchMarker;
 	  this.nativeEvent = nativeEvent;
-	  this.target = nativeEventTarget;
-	  this.currentTarget = nativeEventTarget;
 
 	  var Interface = this.constructor.Interface;
 	  for (var propName in Interface) {
@@ -9412,7 +9411,11 @@
 	    if (normalize) {
 	      this[propName] = normalize(nativeEvent);
 	    } else {
-	      this[propName] = nativeEvent[propName];
+	      if (propName === 'target') {
+	        this.target = nativeEventTarget;
+	      } else {
+	        this[propName] = nativeEvent[propName];
+	      }
 	    }
 	  }
 
@@ -13261,7 +13264,10 @@
 	      }
 	    });
 
-	    nativeProps.children = content;
+	    if (content) {
+	      nativeProps.children = content;
+	    }
+
 	    return nativeProps;
 	  }
 
@@ -18734,7 +18740,7 @@
 
 	'use strict';
 
-	module.exports = '0.14.6';
+	module.exports = '0.14.7';
 
 /***/ },
 /* 147 */
@@ -19752,7 +19758,7 @@
 	      var store = this.props.store;
 
 	      var fakeGame = {
-	        id: 0,
+	        id: 1,
 	        content: 'bubba chubba lubba dubb dubb suckit fill im making this up sucker',
 	        plays: [{
 	          player_id: 1,
@@ -19767,14 +19773,19 @@
 	          name: 'Chompy',
 	          score: 100
 	        }],
-	        score: 0
+	        score: 0,
+	        activeWords: [{
+	          content: '',
+	          y: 0,
+	          x: 0,
+	          time: 0
+	        }]
 	      };
 	      fakeGame.content = fakeGame.content.split(' ');
 	      store.dispatch({
 	        type: 'NEW_GAME',
 	        content: fakeGame
 	      });
-	      document.getElementById('shooter').focus();
 	    }
 	  }, {
 	    key: 'completeWord',
@@ -19786,12 +19797,23 @@
 	      });
 	    }
 	  }, {
+	    key: 'startGame',
+	    value: function startGame() {
+	      var store = this.props.store;
+
+	      store.dispatch({
+	        type: 'START_GAME'
+	      });
+	      document.getElementById('shooter').focus();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var store = this.props.store;
 
 	      var state = store.getState();
 	      var game = state.games;
+
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'app' },
@@ -19806,10 +19828,14 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'col-md-8' },
-	              _react2.default.createElement(
+	              game.id === 0 || game.activeWords[0].content || game.content.length === 0 ? _react2.default.createElement(
 	                'button',
 	                { className: 'new-game btn btn-lg', onClick: this.newGame.bind(this) },
 	                'New Game'
+	              ) : _react2.default.createElement(
+	                'button',
+	                { className: 'start-game btn btn-lg', onClick: this.startGame.bind(this) },
+	                'Start Game'
 	              )
 	            )
 	          )
@@ -19866,10 +19892,13 @@
 	var Game = function (_Component) {
 	  _inherits(Game, _Component);
 
-	  function Game(props) {
+	  function Game(props, ctx) {
 	    _classCallCheck(this, Game);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Game).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Game).call(this, props));
+
+	    console.log(ctx);
+	    return _this;
 	  }
 
 	  _createClass(Game, [{
@@ -19879,7 +19908,7 @@
 	      var game = _props.game;
 	      var completeWord = _props.completeWord;
 
-	      if (word === game.content[0]) {
+	      if (word === game.activeWords[0].content) {
 	        completeWord();
 	      } else {
 	        return;
@@ -19889,6 +19918,12 @@
 	    key: 'render',
 	    value: function render() {
 	      var game = this.props.game;
+
+	      var words = game.activeWords;
+	      var activeWords = [];
+	      words.map(function (word, index) {
+	        activeWords.push(_react2.default.createElement(_word2.default, { content: word.content, y: word.y, x: word.x, time: word.time, key: index }));
+	      });
 
 	      return _react2.default.createElement(
 	        'div',
@@ -19902,7 +19937,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'word-wrapper' },
-	              _react2.default.createElement(_word2.default, { content: game.content[0] })
+	              activeWords
 	            ),
 	            _react2.default.createElement(
 	              'div',
@@ -19982,8 +20017,8 @@
 	    value: function render() {
 	      var plays = this.sortScores();
 	      var leaders = [];
-	      plays.map(function (play) {
-	        leaders.push(_react2.default.createElement(_highscore2.default, { score: play.score, player: play.name, key: play.player_id }));
+	      plays.map(function (play, index) {
+	        leaders.push(_react2.default.createElement(_highscore2.default, { score: play.score, player: play.name, key: index }));
 	      });
 	      return _react2.default.createElement(
 	        'div',
@@ -21349,9 +21384,16 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var initialGame = {
+	  id: 0,
 	  score: 0,
-	  content: [''],
-	  plays: [{}]
+	  content: ['blah'],
+	  plays: [{}],
+	  activeWords: [{
+	    content: '',
+	    y: 0,
+	    x: 0,
+	    time: 0
+	  }]
 	};
 
 	var initialUser = {
@@ -21378,8 +21420,24 @@
 	  switch (action.type) {
 	    case 'NEW_GAME':
 	      return action.content;
+	    case 'START_GAME':
+	      state.activeWords.push({
+	        content: state.content[0],
+	        y: 400,
+	        x: Math.random() * 700,
+	        time: 10
+	      });
+	      state.activeWords = _ramda2.default.remove(0, 1, state.activeWords);
+	      return state;
 	    case 'COMPLETE_WORD':
 	      state.content = _ramda2.default.remove(0, 1, state.content);
+	      state.activeWords.push({
+	        content: state.content[0],
+	        y: 400,
+	        x: Math.random() * 700,
+	        time: 10
+	      });
+	      state.activeWords = _ramda2.default.remove(0, 1, state.activeWords);
 	      state.score = state.score + 10;
 	      return state;
 	    default:
@@ -29886,8 +29944,8 @@
 	      e.preventDefault();
 	      var checkWord = this.props.checkWord;
 
-	      var input = _reactDom2.default.findDOMNode(this.refs.shot).value;
-	      _reactDom2.default.findDOMNode(this.refs.shot).value = '';
+	      var input = this.refs.shot.value;
+	      this.refs.shot.value = '';
 	      checkWord(input);
 	    }
 	  }, {
@@ -29895,7 +29953,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'form',
-	        { onSubmit: this.handleSubmit.bind(this) },
+	        { autoComplete: 'off', onSubmit: this.handleSubmit.bind(this) },
 	        _react2.default.createElement('input', { id: 'shooter', placeholder: 'Type the word and hit enter to kill it', ref: 'shot' })
 	      );
 	    }

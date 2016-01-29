@@ -89,17 +89,26 @@ body {
   background-color: #eee;
 }
 
-.new-game {
+.new-game, .start-game {
   margin: auto;
   background: #34495e;
   color: white;
   display: block;
 }
-.new-game:hover {
+.new-game:hover, .start-game:hover {
   color: white;
 }
-.new-game:focus {
+.new-game:focus, .start-game:focus {
   color: white;
+}
+
+.word-appear {
+  opacity: 0.01;
+}
+
+.word-appear.word-appear-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
 }
 
 /*# sourceMappingURL=main.css.map */

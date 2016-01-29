@@ -16,8 +16,8 @@ class Leaderboard extends Component {
   render() {
     const plays = this.sortScores()
     let leaders = []
-    plays.map((play) => {
-      leaders.push(<Highscore score={play.score} player={play.name} key={play.player_id}/>)
+    plays.map((play, index) => {
+      leaders.push(<Highscore score={play.score} player={play.name} key={index}/>)
     })
     return(
       <div className="leaderboard">

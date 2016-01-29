@@ -26,6 +26,7 @@ const store = createStore(textInvaders)
 
 const render = () => {
   ReactDOM.render(
+    
       <Main store={store}/>
 , mountNode)
 }

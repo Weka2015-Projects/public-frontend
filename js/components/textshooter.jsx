@@ -9,13 +9,13 @@ class Textshooter extends Component {
   handleSubmit(e) {
     e.preventDefault()
     const { checkWord } = this.props
-    const input = ReactDOM.findDOMNode(this.refs.shot).value
-    ReactDOM.findDOMNode(this.refs.shot).value = ''
+    const input = this.refs.shot.value
+    this.refs.shot.value = ''
     checkWord(input)
   }
   render() {
     return(
-      <form onSubmit={this.handleSubmit.bind(this)}>
+      <form autoComplete="off" onSubmit={this.handleSubmit.bind(this)}>
         <input id="shooter" placeholder="Type the word and hit enter to kill it" ref="shot"/>
       </form>
     )

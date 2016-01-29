@@ -95,7 +95,7 @@ body {
 }
 
 
-.new-game {
+.new-game, .start-game{
   margin: auto;
   background: $greyBlue;
   color: white;
@@ -106,4 +106,15 @@ body {
   &:focus {
     color: white;
   }
+}
+
+
+
+.word-appear {
+  opacity: 0.01;
+}
+
+.word-appear.word-appear-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
 }
