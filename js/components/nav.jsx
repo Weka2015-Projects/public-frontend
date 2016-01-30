@@ -7,7 +7,14 @@ class Nav extends Component {
   }
   render() {
     return(
-      <div></div>
+      <div className="navbar">
+        <div className="container">
+          <div className="navbar-brand">
+            Text Invaders
+          </div>
+          <Login />
+        </div>
+      </div>
     )
   }
 }

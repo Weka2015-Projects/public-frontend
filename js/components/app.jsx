@@ -11,7 +11,10 @@ class App extends Component {
 
   render() {
     return(
-      <div></div>
+      <div>
+        <Nav />
+        {this.props.children}
+      </div>
     )
   }
 }

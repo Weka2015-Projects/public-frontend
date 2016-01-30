@@ -10,9 +10,26 @@ class Game extends Component {
   }
 
   render() {
-
+    console.log(this.context)
+    const words = 'Game'
     return(
-      <div></div>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-8">
+            <div className="words">
+              {words}
+            </div>
+            <Textshooter />
+          </div>
+          <div className="col-md-4">
+            <Score />
+            <Leaderboard />
+          </div>
+        </div>
+        <div className="row">
+
+        </div>
+      </div>
     )
   }
 }

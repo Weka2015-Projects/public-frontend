@@ -4,30 +4,30 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import  textInvaders from './reducers/textinvaders.js'
 import App from './components/app.jsx'
+import Game from './components/game.jsx'
+import Users from './components/users.jsx'
+
+import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
+
 
 
 const mountNode = document.getElementById('app')
 
-class Main extends Component {
-  constructor (props) {
-    super(props)
-  }
-  render() {
-    return(
-      <div>
-        <App store={this.props.store} />
-      </div>
-    )
-  }
-}
+
 
 
 const store = createStore(textInvaders)
 
 const render = () => {
   ReactDOM.render(
-    
-      <Main store={store}/>
+    <Provider store={store}>
+      <Router>
+         <Route path="/" component={App}>
+           <IndexRoute component={Game}/>
+           <Route path="users" component={Users}/>
+         </Route>
+       </Router>
+    </Provider>
 , mountNode)
 }
 
