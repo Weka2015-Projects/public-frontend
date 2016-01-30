@@ -24,6 +24,11 @@ const initialUser = {
 
 const user = (state = initialUser, action) => {
   switch(action.type) {
+    case 'SIGN_IN':
+      return {
+        active: true,
+        username: action.data
+      }
     default:
       return state
   }

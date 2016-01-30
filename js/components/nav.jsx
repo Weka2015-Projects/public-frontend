@@ -7,6 +7,12 @@ class Nav extends Component {
     super(props)
   }
   render() {
+    const { store } = this.context
+    const state = store.getState()
+    const welcome =  <div className="welcome"> Welcome {state.user.username}</div>
+    const signin =   <button className="btn btn-success"><Link to="/users">Sign In</Link></button>
+
+
     return(
       <div className="navbar">
         <div className="container">
@@ -14,12 +20,14 @@ class Nav extends Component {
             Text Invaders
           </div>
           <div>
-            <button className="btn btn-success"><Link to="/users">Sign In</Link></button>
+            {state.user.active ? welcome : signin }
           </div>
         </div>
       </div>
     )
   }
 }
-
+Nav.contextTypes = {
+  store: React.PropTypes.object
+}
 export default Nav
