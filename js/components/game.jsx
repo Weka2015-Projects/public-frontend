@@ -22,7 +22,7 @@ class Game extends Component {
     const words = game.activeWords
     let activeWords = []
     words.map((word, index) => {
-      activeWords.push(<Word content={word.content} y={word.y} x={word.x} time={word.time} key={index}/>)
+      activeWords.push(<Word className="active-word" content={word.content} y={word.y} x={word.x} time={word.time} key={index}/>)
     })
 
     return(

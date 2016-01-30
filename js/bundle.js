@@ -19932,7 +19932,7 @@
 	      var words = game.activeWords;
 	      var activeWords = [];
 	      words.map(function (word, index) {
-	        activeWords.push(_react2.default.createElement(_word2.default, { content: word.content, y: word.y, x: word.x, time: word.time, key: index }));
+	        activeWords.push(_react2.default.createElement(_word2.default, { className: 'active-word', content: word.content, y: word.y, x: word.x, time: word.time, key: index }));
 	      });
 
 	      return _react2.default.createElement(
@@ -20118,7 +20118,7 @@
 /* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -20144,17 +20144,56 @@
 	  function Word(props) {
 	    _classCallCheck(this, Word);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Word).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Word).call(this, props));
+
+	    _this.state = {
+	      animate: false,
+	      translate: 'translateY(400px)',
+	      progress: false
+	    };
+	    return _this;
 	  }
 
 	  _createClass(Word, [{
-	    key: "render",
-	    value: function render() {
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate(props) {
 	      var content = this.props.content;
 
+	      console.log(content, props.content);
+	      if (content !== props.content) {
+	        this.setState({
+	          animate: false,
+	          translate: 'none'
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      var animate = this.state.animate;
+
+	      if (!animate) {
+	        this.setState({
+	          animate: true,
+	          translate: 'none'
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var content = _props.content;
+	      var time = _props.time;
+	      var _state = this.state;
+	      var animate = _state.animate;
+	      var translate = _state.translate;
+	      var position = _state.position;
+
+	      console.log(translate);
 	      return _react2.default.createElement(
-	        "div",
-	        { id: "active", className: "word" },
+	        'div',
+	        { id: 'active', style: { transform: translate }, className: 'active-word word' },
 	        content
 	      );
 	    }
@@ -21398,12 +21437,7 @@
 	  score: 0,
 	  content: ['blah'],
 	  plays: [{}],
-	  activeWords: [{
-	    content: '',
-	    y: 0,
-	    x: 0,
-	    time: 0
-	  }]
+	  activeWords: []
 	};
 
 	var initialUser = {

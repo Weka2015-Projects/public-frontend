@@ -109,12 +109,8 @@ body {
 }
 
 
-
-.word-appear {
-  opacity: 0.01;
-}
-
-.word-appear.word-appear-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
+.active-word {
+  position:relative;
+  -webkit-transition: all 10s;
+  transition: all 10s;
 }

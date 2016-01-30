@@ -8,14 +8,7 @@ const initialGame = {
   plays: [{
 
   }],
-  activeWords: [
-    {
-      content:'',
-      y: 0,
-      x: 0,
-      time: 0
-    }
-  ]
+  activeWords: []
 }
 
 const initialUser = {
