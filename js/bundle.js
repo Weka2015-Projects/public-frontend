@@ -19757,100 +19757,9 @@
 	  }
 
 	  _createClass(App, [{
-	    key: 'newGame',
-	    value: function newGame() {
-	      var store = this.props.store;
-
-	      _superagent2.default.get('http://localhost:4000/games').end(function (err, res) {
-	        if (err) {
-	          console.log(err);
-	        }
-	        console.log(res);
-	      });
-	      var fakeGame = {
-	        id: 1,
-	        content: 'bubba chubba lubba dubb dubb suckit fill im making this up sucker',
-	        plays: [{
-	          player_id: 1,
-	          name: 'Jimbob',
-	          score: 10
-	        }, {
-	          player_id: 2,
-	          name: 'Nilu the Destroyer',
-	          score: 5
-	        }, {
-	          player_id: 3,
-	          name: 'Chompy',
-	          score: 100
-	        }],
-	        score: 0,
-	        activeWords: [{
-	          content: '',
-	          y: 0,
-	          x: 0,
-	          time: 0
-	        }]
-	      };
-	      fakeGame.content = fakeGame.content.split(' ');
-	      store.dispatch({
-	        type: 'NEW_GAME',
-	        content: fakeGame
-	      });
-	    }
-	  }, {
-	    key: 'completeWord',
-	    value: function completeWord() {
-	      var store = this.props.store;
-
-	      store.dispatch({
-	        type: 'COMPLETE_WORD'
-	      });
-	    }
-	  }, {
-	    key: 'startGame',
-	    value: function startGame() {
-	      var store = this.props.store;
-
-	      store.dispatch({
-	        type: 'START_GAME'
-	      });
-	      document.getElementById('shooter').focus();
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var store = this.props.store;
-
-	      var state = store.getState();
-	      var game = state.games;
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'app' },
-	        _react2.default.createElement(_nav2.default, null),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'container' },
-	          _react2.default.createElement(_game2.default, { game: game, completeWord: this.completeWord.bind(this) }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'row' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-md-8' },
-	              game.id === 0 || game.activeWords[0].content || game.content.length === 0 ? _react2.default.createElement(
-	                'button',
-	                { className: 'new-game btn btn-lg', onClick: this.newGame.bind(this) },
-	                'New Game'
-	              ) : _react2.default.createElement(
-	                'button',
-	                { className: 'start-game btn btn-lg', onClick: this.startGame.bind(this) },
-	                'Start Game'
-	              )
-	            )
-	          )
-	        )
-	      );
+	      return _react2.default.createElement('div', null);
 	    }
 	  }]);
 
@@ -19902,67 +19811,17 @@
 	var Game = function (_Component) {
 	  _inherits(Game, _Component);
 
-	  function Game(props, ctx) {
+	  function Game(props) {
 	    _classCallCheck(this, Game);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Game).call(this, props));
-
-	    console.log(ctx);
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Game).call(this, props));
 	  }
 
 	  _createClass(Game, [{
-	    key: 'checkWord',
-	    value: function checkWord(word) {
-	      var _props = this.props;
-	      var game = _props.game;
-	      var completeWord = _props.completeWord;
-
-	      if (word === game.activeWords[0].content) {
-	        completeWord();
-	      } else {
-	        return;
-	      }
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var game = this.props.game;
 
-	      var words = game.activeWords;
-	      var activeWords = [];
-	      words.map(function (word, index) {
-	        activeWords.push(_react2.default.createElement(_word2.default, { className: 'active-word', content: word.content, y: word.y, x: word.x, time: word.time, key: index }));
-	      });
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'row' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'game col-md-12' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'game-wrapper col-md-8' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'word-wrapper' },
-	              activeWords
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'shooter-wrapper' },
-	              _react2.default.createElement(_textshooter2.default, { checkWord: this.checkWord.bind(this) })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'scores-wrapper col-md-4' },
-	            _react2.default.createElement(_score2.default, { score: game.score }),
-	            _react2.default.createElement(_leaderboard2.default, { plays: game.plays })
-	          )
-	        )
-	      );
+	      return _react2.default.createElement('div', null);
 	    }
 	  }]);
 
@@ -20013,33 +19872,10 @@
 	  }
 
 	  _createClass(Leaderboard, [{
-	    key: 'sortScores',
-	    value: function sortScores() {
-	      var plays = this.props.plays;
-
-	      var mostRecent = _ramda2.default.sort(function (a, b) {
-	        return b.score - a.score;
-	      }, plays);
-	      return mostRecent;
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var plays = this.sortScores();
-	      var leaders = [];
-	      plays.map(function (play, index) {
-	        leaders.push(_react2.default.createElement(_highscore2.default, { score: play.score, player: play.name, key: index }));
-	      });
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'leaderboard' },
-	        _react2.default.createElement(
-	          'h4',
-	          null,
-	          'Highscores'
-	        ),
-	        leaders
-	      );
+
+	      return _react2.default.createElement('div', null);
 	    }
 	  }]);
 
@@ -20088,24 +19924,7 @@
 	  _createClass(Nav, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'navbar' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'container' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'site-title' },
-	            'Text invaders'
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'navigation' },
-	            _react2.default.createElement(_login2.default, null)
-	          )
-	        )
-	      );
+	      return _react2.default.createElement('div', null);
 	    }
 	  }]);
 
@@ -20144,58 +19963,14 @@
 	  function Word(props) {
 	    _classCallCheck(this, Word);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Word).call(this, props));
-
-	    _this.state = {
-	      animate: false,
-	      translate: 'translateY(400px)',
-	      progress: false
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Word).call(this, props));
 	  }
 
 	  _createClass(Word, [{
-	    key: 'componentWillUpdate',
-	    value: function componentWillUpdate(props) {
-	      var content = this.props.content;
-
-	      console.log(content, props.content);
-	      if (content !== props.content) {
-	        this.setState({
-	          animate: false,
-	          translate: 'none'
-	        });
-	      }
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      var animate = this.state.animate;
-
-	      if (!animate) {
-	        this.setState({
-	          animate: true,
-	          translate: 'none'
-	        });
-	      }
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _props = this.props;
-	      var content = _props.content;
-	      var time = _props.time;
-	      var _state = this.state;
-	      var animate = _state.animate;
-	      var translate = _state.translate;
-	      var position = _state.position;
 
-	      console.log(translate);
-	      return _react2.default.createElement(
-	        'div',
-	        { id: 'active', style: { transform: translate }, className: 'active-word word' },
-	        content
-	      );
+	      return _react2.default.createElement('div', null);
 	    }
 	  }]);
 
@@ -20208,7 +19983,7 @@
 /* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -20238,15 +20013,9 @@
 	  }
 
 	  _createClass(Score, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
-	      var score = this.props.score;
-
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "current-score" },
-	        score
-	      );
+	      return _react2.default.createElement('div', null);
 	    }
 	  }]);
 
@@ -21433,63 +21202,52 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var initialGame = {
-	  id: 0,
-	  score: 0,
-	  content: ['blah'],
-	  plays: [{}],
-	  activeWords: []
-	};
+	  active: false,
+	  content: [{
+	    content: '',
+	    active: false
 
+	  }],
+	  score: 0
+	};
+	var initialContent = {
+	  active: false,
+	  content: ''
+	};
 	var initialUser = {
-	  id: 0,
-	  name: ''
+	  active: false,
+	  username: ''
 	};
 
-	var users = function users() {
+	var user = function user() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialUser : arguments[0];
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case "SIGN_IN":
-	      return action.content;
 	    default:
 	      return state;
 	  }
 	};
+	var content = function content() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialContent : arguments[0];
+	  var action = arguments[1];
 
-	var games = function games() {
+	  switch (action.type) {
+	    default:
+	      return state;
+	  }
+	};
+	var game = function game() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialGame : arguments[0];
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case 'NEW_GAME':
-	      return action.content;
-	    case 'START_GAME':
-	      state.activeWords.push({
-	        content: state.content[0],
-	        y: 400,
-	        x: Math.random() * 700,
-	        time: 10
-	      });
-	      state.activeWords = _ramda2.default.remove(0, 1, state.activeWords);
-	      return state;
-	    case 'COMPLETE_WORD':
-	      state.content = _ramda2.default.remove(0, 1, state.content);
-	      state.activeWords.push({
-	        content: state.content[0],
-	        y: 400,
-	        x: Math.random() * 700,
-	        time: 10
-	      });
-	      state.activeWords = _ramda2.default.remove(0, 1, state.activeWords);
-	      state.score = state.score + 10;
-	      return state;
 	    default:
 	      return state;
 	  }
 	};
 
-	var textInvaders = (0, _redux.combineReducers)({ games: games });
+	var textInvaders = (0, _redux.combineReducers)({ game: game, content: content, user: user });
 
 	exports.default = textInvaders;
 
@@ -29983,23 +29741,9 @@
 	  }
 
 	  _createClass(Textshooter, [{
-	    key: 'handleSubmit',
-	    value: function handleSubmit(e) {
-	      e.preventDefault();
-	      var checkWord = this.props.checkWord;
-
-	      var input = this.refs.shot.value;
-	      this.refs.shot.value = '';
-	      checkWord(input);
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'form',
-	        { autoComplete: 'off', onSubmit: this.handleSubmit.bind(this) },
-	        _react2.default.createElement('input', { id: 'shooter', placeholder: 'Type the word and hit enter to kill it', ref: 'shot' })
-	      );
+	      return _react2.default.createElement('div', null);
 	    }
 	  }]);
 
@@ -30012,7 +29756,7 @@
 /* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -30042,26 +29786,10 @@
 	  }
 
 	  _createClass(Highscore, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
-	      var _props = this.props;
-	      var player = _props.player;
-	      var score = _props.score;
 
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "score" },
-	        _react2.default.createElement(
-	          "span",
-	          { className: "points col-xs-3" },
-	          score
-	        ),
-	        _react2.default.createElement(
-	          "span",
-	          { className: "player col-xs-9" },
-	          player
-	        )
-	      );
+	      return _react2.default.createElement('div', null);
 	    }
 	  }]);
 

@@ -5,11 +5,9 @@ class Score extends Component {
     super(props)
   }
   render() {
-    const { score } = this.props
     return(
-      <div className="current-score">
-        {score}
-      </div>
+      <div></div>
+
     )
   }
 }
