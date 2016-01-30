@@ -6,11 +6,18 @@ class Nav extends Component {
   constructor (props) {
     super(props)
   }
+  signOut(e) {
+    const { store } = this.context
+    e.preventDefault()
+    store.dispatch({
+      type: 'SIGN_OUT'
+    })
+  }
   render() {
     const { store } = this.context
     const state = store.getState()
-    const welcome =  <div className="welcome"> Welcome {state.user.username}</div>
-    const signin =   <button className="btn btn-success"><Link to="/users">Sign In</Link></button>
+    const welcome =  <div className="welcome"> Welcome {state.user.username} <button onClick={this.signOut.bind(this)} className="btn btn-success">Sign Out</button></div>
+    const signin =   <Link to="/users"><button className="btn btn-success">Sign In</button></Link>
 
 
     return(

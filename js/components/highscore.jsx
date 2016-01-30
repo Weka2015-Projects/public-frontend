@@ -7,7 +7,14 @@ class Highscore extends Component {
   render() {
 
     return(
-      <div></div>
+      <div className="row">
+        <div className="col-xs-4">
+          Points
+        </div>
+        <div className="col-xs-8">
+          Player Name
+        </div>
+      </div>
     )
   }
 }

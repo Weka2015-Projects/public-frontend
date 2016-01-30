@@ -20900,6 +20900,11 @@
 	        active: true,
 	        username: action.data
 	      };
+	    case 'SIGN_OUT':
+	      return {
+	        active: false,
+	        username: ''
+	      };
 	    default:
 	      return state;
 	  }
@@ -29497,6 +29502,12 @@
 	  }
 
 	  _createClass(Game, [{
+	    key: 'loadGame',
+	    value: function loadGame(e) {
+	      e.preventDefault();
+	      console.log('new game');
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var words = 'Game';
@@ -29519,7 +29530,15 @@
 	            _react2.default.createElement(_leaderboard2.default, null)
 	          )
 	        ),
-	        _react2.default.createElement('div', { className: 'row' })
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'btn btn-success', onClick: this.loadGame.bind(this) },
+	            'New Game'
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -29530,6 +29549,7 @@
 	Game.contextTypes = {
 	  store: _react2.default.PropTypes.object
 	};
+
 	exports.default = Game;
 
 /***/ },
@@ -29720,7 +29740,16 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        highscores
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          'Highscores'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: '' },
+	          _react2.default.createElement(_highscore2.default, null)
+	        )
 	      );
 	    }
 	  }]);
@@ -29766,6 +29795,16 @@
 	  }
 
 	  _createClass(Nav, [{
+	    key: 'signOut',
+	    value: function signOut(e) {
+	      var store = this.context.store;
+
+	      e.preventDefault();
+	      store.dispatch({
+	        type: 'SIGN_OUT'
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var store = this.context.store;
@@ -29775,14 +29814,20 @@
 	        'div',
 	        { className: 'welcome' },
 	        ' Welcome ',
-	        state.user.username
+	        state.user.username,
+	        ' ',
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.signOut.bind(this), className: 'btn btn-success' },
+	          'Sign Out'
+	        )
 	      );
 	      var signin = _react2.default.createElement(
-	        'button',
-	        { className: 'btn btn-success' },
+	        _reactRouter.Link,
+	        { to: '/users' },
 	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/users' },
+	          'button',
+	          { className: 'btn btn-success' },
 	          'Sign In'
 	        )
 	      );
@@ -29821,7 +29866,7 @@
 /* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -29851,10 +29896,23 @@
 	  }
 
 	  _createClass(Highscore, [{
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 
-	      return _react2.default.createElement('div', null);
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "row" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "col-xs-4" },
+	          "Points"
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "col-xs-8" },
+	          "Player Name"
+	        )
+	      );
 	    }
 	  }]);
 

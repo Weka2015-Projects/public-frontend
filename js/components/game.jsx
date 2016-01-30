@@ -8,13 +8,17 @@ class Game extends Component {
   constructor (props, context) {
     super(props)
   }
-
+  loadGame(e) {
+    e.preventDefault()
+    console.log('new game')
+  }
   render() {
     const words = 'Game'
     return(
       <div className="container">
         <div className="row">
           <div className="col-md-8">
+
             <WordBox />
             <Textshooter />
           </div>
@@ -24,7 +28,7 @@ class Game extends Component {
           </div>
         </div>
         <div className="row">
-
+          <div className="btn btn-success" onClick={this.loadGame.bind(this)}>New Game</div>
         </div>
       </div>
     )
@@ -34,4 +38,5 @@ class Game extends Component {
 Game.contextTypes = {
   store: React.PropTypes.object
 }
+
 export default Game

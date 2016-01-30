@@ -8,10 +8,13 @@ class Leaderboard extends Component {
   }
 
   render() {
-    
+
     return (
       <div>
-        { highscores }
+        <h4>Highscores</h4>
+        <div className="">
+          <Highscore />
+        </div>
       </div>
     )
   }

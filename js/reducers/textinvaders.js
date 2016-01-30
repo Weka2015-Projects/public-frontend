@@ -29,6 +29,11 @@ const user = (state = initialUser, action) => {
         active: true,
         username: action.data
       }
+    case 'SIGN_OUT':
+      return {
+        active: false,
+        username: ''
+      }
     default:
       return state
   }
