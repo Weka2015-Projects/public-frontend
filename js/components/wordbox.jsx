@@ -6,15 +6,29 @@ class WordBox extends Component {
     super(props)
 
   }
+  startGame(e) {
+    const { store } = this.context
+    e.preventDefault()
 
+  }
   render() {
+    const { store } = this.context
+    const state = store.getState()
+    const gameIsActive = state.game.active
+    const contentLoaded = state.content.active
+    const startButton = <div className='btn btn-success' onClick={this.startGame.bind(this)}>Start Game</div>
 
+    const words = []
     return(
       <div>
-        Im a box
+        { !gameIsActive && contentLoaded ? startButton : words}
       </div>
     )
   }
+}
+
+WordBox.contextTypes = {
+  store: React.PropTypes.object
 }
 
 export default WordBox

@@ -11,6 +11,7 @@ class Users extends Component {
         <div className="row">
           <h3>Sign in</h3>
           <p>To save your scores</p>
+          Work pls
           <Login />
         </div>
       </div>

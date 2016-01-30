@@ -9,16 +9,29 @@ class Game extends Component {
     super(props)
   }
   loadGame(e) {
+    const { store } = this.context
     e.preventDefault()
-    console.log('new game')
+    store.dispatch({
+      type:'NEW_GAME',
+      content:['hi', 'bob']
+    })
+  }
+  restartGame(e){
+    const { store } = this.context
+    e.preventDefault()
+    store.dispatch({
+      type:'RESTART_GAME'
+    })
   }
   render() {
-    const words = 'Game'
+    const { store } = this.context
+    const state = store.getState()
+    const loadGame =  <div className="btn btn-success" onClick={this.loadGame.bind(this)}>New Game</div>
+    const restartGame = <div className="btn btn-success" onClick={this.restartGame.bind(this)}>Replay</div>
     return(
       <div className="container">
         <div className="row">
           <div className="col-md-8">
-
             <WordBox />
             <Textshooter />
           </div>
@@ -28,7 +41,9 @@ class Game extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="btn btn-success" onClick={this.loadGame.bind(this)}>New Game</div>
+          <div className="col-md-8">
+            { !state.content.active ? loadGame : restartGame }
+          </div>
         </div>
       </div>
     )
