@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Word from './word.jsx'
+import WordBox from './wordbox.jsx'
 import Score from './score.jsx'
 import Leaderboard from './leaderboard.jsx'
 import Textshooter from './textshooter.jsx'
@@ -15,9 +15,7 @@ class Game extends Component {
       <div className="container">
         <div className="row">
           <div className="col-md-8">
-            <div className="words">
-              {words}
-            </div>
+            <WordBox />
             <Textshooter />
           </div>
           <div className="col-md-4">
