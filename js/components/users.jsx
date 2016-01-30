@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Login from './login.jsx'
 
 class Users extends Component {
   constructor (props) {
@@ -6,10 +7,19 @@ class Users extends Component {
   }
   render() {
     return(
-      <div>Users</div>
-
+      <div className="container">
+        <div className="row">
+          <h3>Sign in</h3>
+          <p>To save your scores</p>
+          <Login />
+        </div>
+      </div>
     )
   }
+}
+
+Users.contextTypes = {
+  store: React.PropTypes.object
 }
 
 export default Users

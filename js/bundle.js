@@ -19751,6 +19751,8 @@
 	  _createClass(App, [{
 	    key: 'render',
 	    value: function render() {
+	      var store = this.context.store;
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -19762,6 +19764,10 @@
 
 	  return App;
 	}(_react.Component);
+
+	App.contextTypes = {
+	  store: _react2.default.PropTypes.object
+	};
 
 	exports.default = App;
 
@@ -19808,7 +19814,7 @@
 	var Game = function (_Component) {
 	  _inherits(Game, _Component);
 
-	  function Game(props) {
+	  function Game(props, context) {
 	    _classCallCheck(this, Game);
 
 	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Game).call(this, props));
@@ -19817,7 +19823,6 @@
 	  _createClass(Game, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.context);
 	      var words = 'Game';
 	      return _react2.default.createElement(
 	        'div',
@@ -19850,6 +19855,9 @@
 	  return Game;
 	}(_react.Component);
 
+	Game.contextTypes = {
+	  store: _react2.default.PropTypes.object
+	};
 	exports.default = Game;
 
 /***/ },
@@ -19930,6 +19938,8 @@
 
 	var _login2 = _interopRequireDefault(_login);
 
+	var _reactRouter = __webpack_require__(200);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19961,7 +19971,19 @@
 	            { className: 'navbar-brand' },
 	            'Text Invaders'
 	          ),
-	          _react2.default.createElement(_login2.default, null)
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'btn btn-success' },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/users' },
+	                'Sign In'
+	              )
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -29853,8 +29875,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRouter = __webpack_require__(200);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29873,19 +29893,29 @@
 	  }
 
 	  _createClass(Login, [{
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      e.preventDefault();
+	      console.log(this.refs.username.value);
+	      //Dispatch Sign-in and re
+	      window.location.href = '/#/';
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
-	        null,
+	        'form',
+	        { className: 'sign-in', onSubmit: this.handleSubmit.bind(this) },
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Username'
+	        ),
+	        _react2.default.createElement('input', { ref: 'username', placeholder: 'Bubba' }),
 	        _react2.default.createElement(
 	          'button',
-	          { className: 'btn btn-success' },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/users' },
-	            'Sign In'
-	          )
+	          { className: 'btn btn-success btn-lg' },
+	          'Sign in'
 	        )
 	      );
 	    }
@@ -35770,6 +35800,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _login = __webpack_require__(189);
+
+	var _login2 = _interopRequireDefault(_login);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35792,14 +35826,32 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        'Users'
+	        { className: 'container' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            'Sign in'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'To save your scores'
+	          ),
+	          _react2.default.createElement(_login2.default, null)
+	        )
 	      );
 	    }
 	  }]);
 
 	  return Users;
 	}(_react.Component);
+
+	Users.contextTypes = {
+	  store: _react2.default.PropTypes.object
+	};
 
 	exports.default = Users;
 

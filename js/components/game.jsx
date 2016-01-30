@@ -5,12 +5,11 @@ import Leaderboard from './leaderboard.jsx'
 import Textshooter from './textshooter.jsx'
 
 class Game extends Component {
-  constructor (props) {
+  constructor (props, context) {
     super(props)
   }
 
   render() {
-    console.log(this.context)
     const words = 'Game'
     return(
       <div className="container">
@@ -34,4 +33,7 @@ class Game extends Component {
   }
 }
 
+Game.contextTypes = {
+  store: React.PropTypes.object
+}
 export default Game

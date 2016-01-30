@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Login from './login.jsx'
+import { Link } from 'react-router'
+
 
 class Nav extends Component {
   constructor (props) {
@@ -12,7 +14,9 @@ class Nav extends Component {
           <div className="navbar-brand">
             Text Invaders
           </div>
-          <Login />
+          <div>
+            <button className="btn btn-success"><Link to="/users">Sign In</Link></button>
+          </div>
         </div>
       </div>
     )
