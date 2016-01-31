@@ -67,6 +67,9 @@ const game = (state = initialGame, action) => {
       newGame.content[0].active = true
       return newGame
     case 'NEXT_WORD':
+        if (state.content[action.index + 1]) {
+          state.content[action.index + 1].active = true
+        }
       return state
     case 'COMPLETE_WORD':
       state.content[action.index] = {

@@ -1,13 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300);
-$red: #c0392b;
-$orange: #e67e22;
-$darkOrange: #d35400;
+$blue: #2980b9;
+$green: #2ecc71;
+$darkGreen: #27ae60;
 body {
   font-family: 'Open Sans', sans-serif;
 }
 
 .navbar {
-  background-color: $red;
+  background-color: $blue;
   border-radius: 0px;
   height: 65px;
   .navbar-brand {
@@ -33,10 +33,10 @@ body {
     padding: 15px;
     button {
       margin-left: 15px;
-      background-color: $orange;
+      background-color: $green;
       border:none;
       &:hover {
-        background-color: $darkOrange;
+        background-color: $darkGreen;
       }
     }
   }
@@ -45,10 +45,10 @@ body {
     float: right;
     padding: 15px;
     button {
-      background-color: $orange;
+      background-color: $green;
       border:none;
       &:hover {
-        background-color: $darkOrange;
+        background-color: $darkGreen;
       }
     }
   }
@@ -80,10 +80,10 @@ body {
       font-size: 3rem;
       margin: auto;
       display: block;
-      background-color: $orange;
+      background-color: $green;
       border:none;
       &:hover {
-        background-color: $darkOrange;
+        background-color: $darkGreen;
       }
     }
     .game-over {
@@ -134,7 +134,7 @@ body {
       font-weight: bold;
       letter-spacing: 2px;
       line-height: 4rem;
-      background-color: $red;
+      background-color: $blue;
       color: white;
       text-align: center;
       margin-bottom: 0px;
@@ -163,10 +163,10 @@ body {
     font-size: 3rem;
     margin: 50px auto 0 auto;
     display: block;
-    background-color: $orange;
+    background-color: $green;
     border:none;
     &:hover {
-      background-color: $darkOrange;
+      background-color: $darkGreen;
     }
   }
 }
@@ -199,10 +199,10 @@ body {
       margin-top: 15px;
       line-height: 2.5rem;
       display: block;
-      background-color: $orange;
+      background-color: $green;
       border:none;
       &:hover {
-        background-color: $darkOrange;
+        background-color: $darkGreen;
       }
     }
   }
