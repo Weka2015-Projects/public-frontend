@@ -14,7 +14,7 @@ class Game extends Component {
     e.preventDefault()
     store.dispatch({
       type:'NEW_GAME',
-      data:['hi', 'bob'],
+      data:['hi', 'bob', 'bubba', 'grubba', 'dingo', 'beats', 'by', 'dre'],
       id: 0,
       highscores: [{
         name: 'Nilu the destroyer',
@@ -58,7 +58,7 @@ class Game extends Component {
       <div className="container">
         <div className="row">
           <div className="col-md-8 game-container">
-            <WordBox />
+            <WordBox game={state.game}/>
             <Textshooter />
           </div>
           <div className="col-md-4 scores-container">

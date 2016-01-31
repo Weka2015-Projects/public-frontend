@@ -29,32 +29,39 @@ class WordBox extends Component {
     })
     document.getElementById('shooter').focus()
   }
-  // componentWillUpdate(){
+  // componentDidUpdate(){
   //   const { store } = this.context
   //   const { time } = this.state
   //   const state = store.getState()
   //   const gameIsActive = state.game.active
-  //   if (gameIsActive && time === 0) {
+  //   const gameIsOver = state.game.completed
+  //   if (gameIsActive && time === 0 && !this.interval) {
   //     this.interval = setInterval(this.timer.bind(this), 1000)
-  //   }
-  //   if (!gameIsActive) {
-  //     clearInterval(this.interval)
+  //     console.log('this duped')
   //   }
   //
   // }
   // timer() {
   //   const { store } = this.context
   //   const { time } = this.state
+  //
+  //   const gameIsOver = store.getState().game.completed
   //   const allWords = store.getState().game.content
   //   const activeWords = R.filter((word) => word.active === true, allWords)
-  //   this.setState({
-  //     time: time + 1
-  //   })
-  //   if (time % 5) {
+  //   if (!gameIsOver) {
+  //     this.setState({
+  //       time: time + 1
+  //     })
+  //   }
+  //   if (time % 6 === 0 && time !== 0) {
   //     store.dispatch({
   //       type: 'NEXT_WORD',
   //       index: allWords.indexOf(activeWords[activeWords.length - 1])
   //     })
+  //   }
+  //
+  //   if(gameIsOver){
+  //     clearInterval(this.interval)
   //   }
   // }
   render() {
@@ -66,7 +73,7 @@ class WordBox extends Component {
     const content = gameIsActive ? state.game.content : []
     const words = []
     content.map((word, index) => {
-      words.push(<Word active={word.active} completed={word.completed} content={word.content} key={index}/>)
+      words.push(<Word active={word.active} completed={word.completed} content={word.content} key={index} index={index}/>)
     })
     return(
       <div className="word-container">

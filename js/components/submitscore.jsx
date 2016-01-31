@@ -6,7 +6,6 @@ class SubmitScore extends Component {
     }
     render() {
       const { gameId, score, player, status } = this.props
-      console.log(player)
       return (
         <div className="game-over">
           <h3 className="status">

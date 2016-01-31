@@ -58,14 +58,20 @@ body {
   border-bottom: none;
 }
 .game-container .word-container .word {
+  position: absolute;
   margin: auto;
   width: 100%;
+  padding: 25px 0;
   text-align: center;
-  font-size: 3rem;
+  font-size: 2rem;
+  background-image: url("../img/alien.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100px;
   transition: all 10s linear;
 }
 .game-container .word-container .translate {
-  top: -25px;
+  top: -100px;
   position: relative;
 }
 .game-container .word-container .btn {

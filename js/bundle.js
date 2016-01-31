@@ -29568,7 +29568,7 @@
 	      e.preventDefault();
 	      store.dispatch({
 	        type: 'NEW_GAME',
-	        data: ['hi', 'bob'],
+	        data: ['hi', 'bob', 'bubba', 'grubba', 'dingo', 'beats', 'by', 'dre'],
 	        id: 0,
 	        highscores: [{
 	          name: 'Nilu the destroyer',
@@ -29633,7 +29633,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'col-md-8 game-container' },
-	            _react2.default.createElement(_wordbox2.default, null),
+	            _react2.default.createElement(_wordbox2.default, { game: state.game }),
 	            _react2.default.createElement(_textshooter2.default, null)
 	          ),
 	          _react2.default.createElement(
@@ -29737,32 +29737,39 @@
 	      });
 	      document.getElementById('shooter').focus();
 	    }
-	    // componentWillUpdate(){
+	    // componentDidUpdate(){
 	    //   const { store } = this.context
 	    //   const { time } = this.state
 	    //   const state = store.getState()
 	    //   const gameIsActive = state.game.active
-	    //   if (gameIsActive && time === 0) {
+	    //   const gameIsOver = state.game.completed
+	    //   if (gameIsActive && time === 0 && !this.interval) {
 	    //     this.interval = setInterval(this.timer.bind(this), 1000)
-	    //   }
-	    //   if (!gameIsActive) {
-	    //     clearInterval(this.interval)
+	    //     console.log('this duped')
 	    //   }
 	    //
 	    // }
 	    // timer() {
 	    //   const { store } = this.context
 	    //   const { time } = this.state
+	    //
+	    //   const gameIsOver = store.getState().game.completed
 	    //   const allWords = store.getState().game.content
 	    //   const activeWords = R.filter((word) => word.active === true, allWords)
-	    //   this.setState({
-	    //     time: time + 1
-	    //   })
-	    //   if (time % 5) {
+	    //   if (!gameIsOver) {
+	    //     this.setState({
+	    //       time: time + 1
+	    //     })
+	    //   }
+	    //   if (time % 6 === 0 && time !== 0) {
 	    //     store.dispatch({
 	    //       type: 'NEXT_WORD',
 	    //       index: allWords.indexOf(activeWords[activeWords.length - 1])
 	    //     })
+	    //   }
+	    //
+	    //   if(gameIsOver){
+	    //     clearInterval(this.interval)
 	    //   }
 	    // }
 
@@ -29782,7 +29789,7 @@
 	      var content = gameIsActive ? state.game.content : [];
 	      var words = [];
 	      content.map(function (word, index) {
-	        words.push(_react2.default.createElement(_word2.default, { active: word.active, completed: word.completed, content: word.content, key: index }));
+	        words.push(_react2.default.createElement(_word2.default, { active: word.active, completed: word.completed, content: word.content, key: index, index: index }));
 	      });
 	      return _react2.default.createElement(
 	        'div',
@@ -29874,7 +29881,7 @@
 	        duration: 0,
 	        easing: 'linear'
 	      });
-	      if (time === 7 && active) {
+	      if (time === 7 && active && !this.interval) {
 	        this.interval = setInterval(this.tick.bind(this), 1000);
 	      }
 	      if (!active) {
@@ -29891,8 +29898,9 @@
 	    value: function tick() {
 	      var time = this.state.time;
 	      var store = this.context.store;
+	      var content = this.props.content;
 
-	      console.log(time);
+	      console.log(content, time);
 	      if (time === 0) {
 	        store.dispatch({
 	          type: 'LOSE_GAME'
@@ -29911,12 +29919,13 @@
 	      var content = _props.content;
 	      var active = _props.active;
 	      var completed = _props.completed;
+	      var index = _props.index;
 
 	      var display = active && !completed ? 'inline-block' : 'none';
 	      var transitions = active ? 'translate' : 'static';
 	      return _react2.default.createElement(
 	        'div',
-	        { className: "word " + transitions, style: { display: display } },
+	        { className: "word " + transitions, style: { display: display, zIndex: index } },
 	        content
 	      );
 	    }
@@ -39809,7 +39818,6 @@
 	      var player = _props.player;
 	      var status = _props.status;
 
-	      console.log(player);
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "game-over" },
