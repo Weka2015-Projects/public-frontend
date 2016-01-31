@@ -48,7 +48,6 @@ class Word extends Component {
     const { time } = this.state
     const { store } = this.context
     const { content } = this.props
-    console.log(content, time)
     if (time === 0) {
       store.dispatch({
         type: 'LOSE_GAME'
