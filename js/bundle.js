@@ -36178,27 +36178,65 @@
 	  function Word(props) {
 	    _classCallCheck(this, Word);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Word).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Word).call(this, props));
+
+	    _this.state = {
+	      time: 7
+	    };
+	    return _this;
 	  }
 
 	  _createClass(Word, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      var time = this.state.time;
+	      var active = this.props.active;
+
 	      (0, _jquery2.default)('.translate').animate({
 	        top: '600px'
 	      }, {
 	        duration: 0,
 	        easing: 'linear'
 	      });
+	      if (time === 7 && active) {
+	        this.interval = setInterval(this.tick.bind(this), 1000);
+	      }
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
+	      var time = this.state.time;
+	      var active = this.props.active;
+
 	      (0, _jquery2.default)('.translate').animate({
 	        top: '600px'
 	      }, {
 	        duration: 0,
 	        easing: 'linear'
+	      });
+	      if (time === 7 && active) {
+	        this.interval = setInterval(this.tick.bind(this), 1000);
+	      }
+	      if (!active) {
+	        clearInterval(this.interval);
+	      }
+	    }
+	  }, {
+	    key: 'tick',
+	    value: function tick() {
+	      var time = this.state.time;
+	      var store = this.context.store;
+
+	      console.log(time);
+	      if (time === 0) {
+	        store.dispatch({
+	          type: 'LOSE_GAME'
+	        });
+	        clearInterval(this.interval);
+	        return;
+	      }
+	      this.setState({
+	        time: time - 1
 	      });
 	    }
 	  }, {
@@ -36222,6 +36260,9 @@
 	  return Word;
 	}(_react.Component);
 
+	Word.contextTypes = {
+	  store: _react2.default.PropTypes.object
+	};
 	exports.default = Word;
 
 /***/ },
