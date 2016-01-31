@@ -1,20 +1,45 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300);
-$greyBlue: #34495e;
-
+$red: #c0392b;
+$orange: #e67e22;
+$darkOrange: #d35400;
 body {
   font-family: 'Open Sans', sans-serif;
 }
 
 .navbar {
+  background-color: $red;
+  border-radius: 0px;
+  height: 65px;
   .navbar-brand {
-
+    color: white;
+    line-height: 3rem;
+    font-size: 2rem;
+    font-weight:bold;
   }
   .welcome {
-
+    line-height: 3rem;
+    color: white;
+    float: right;
+    padding: 15px;
+    button {
+      margin-left: 15px;
+      background-color: $orange;
+      border:none;
+      &:hover {
+        background-color: $darkOrange;
+      }
+    }
   }
   .signin {
+    line-height: 3rem;
+    float: right;
+    padding: 15px;
     button {
-
+      background-color: $orange;
+      border:none;
+      &:hover {
+        background-color: $darkOrange;
+      }
     }
   }
 }
@@ -35,15 +60,38 @@ body {
       transition: all 10s linear;
     }
     .translate {
-      top: -100px;
+      top: -25px;
       position: relative;
     }
     .btn {
       position: relative;
       top: 45%;
-      width: 100px;
+      width: 200px;
+      font-size: 3rem;
       margin: auto;
       display: block;
+      background-color: $orange;
+      border:none;
+      &:hover {
+        background-color: $darkOrange;
+      }
+    }
+    .game-over {
+      width: 50%;
+      display: block;
+      margin: 150px auto;
+      .status {
+        font-size: 5rem;
+        text-align: center;
+      }
+      .score {
+        text-align: center;
+        font-size: 7rem;
+      }
+      .btn {
+        font-size: 2rem;
+        color: white;
+      }
     }
   }
   .shooter {
@@ -63,6 +111,7 @@ body {
 
 .scores-container {
   .score {
+    margin: 50px 0;
     width: 100%;
     font-size: 5rem;
     text-align: center;
@@ -70,14 +119,81 @@ body {
   .highscore-container {
 
     h4 {
+      font-size: 2rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 2px;
+      line-height: 4rem;
+      background-color: $red;
+      color: white;
       text-align: center;
+      margin-bottom: 0px;
     }
     .highscore {
-
+      border-left: 1px solid #eee;
+      border-right: 1px solid #eee;
+      .name {
+        font-size: 2rem;
+        line-height: 3rem;
+      }
+      .number {
+        text-align: center;
+        font-size: 2.5rem;
+      }
+      &:nth-child(2n){
+        background-color: #eee;
+      }
     }
   }
 }
 
 .actions-container {
+  .btn {
+    width: 200px;
+    font-size: 3rem;
+    margin: 50px auto 0 auto;
+    display: block;
+    background-color: $orange;
+    border:none;
+    &:hover {
+      background-color: $darkOrange;
+    }
+  }
+}
 
+
+/* Sign in page */
+
+.users {
+  h2 {
+    font-size: 4rem;
+  }
+  p {
+    font-size: 1.8rem;
+  }
+  .sign-in {
+    label {
+      font-size: 1.8rem;
+      line-height: 3rem;
+      font-weight: bold;
+      display: block;
+    }
+    input {
+      width: 50%;
+      line-height: 3rem;
+      display: block;
+      text-align: center;
+    }
+    button {
+      width: 50%;
+      margin-top: 15px;
+      line-height: 2.5rem;
+      display: block;
+      background-color: $orange;
+      border:none;
+      &:hover {
+        background-color: $darkOrange;
+      }
+    }
+  }
 }

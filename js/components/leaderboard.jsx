@@ -8,13 +8,15 @@ class Leaderboard extends Component {
   }
 
   render() {
-    const scores = []
-
+    const { scores } = this.props
+    const scoresRender = []
+    scores.map((score, index) => {
+      scoresRender.push(<Highscore name={score.name} score={score.score} key={index} />)
+    })
     return (
       <div className="highscore-container">
         <h4>Highscores</h4>
-        <div className="row">
-        </div>
+          {scoresRender}
       </div>
     )
   }

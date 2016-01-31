@@ -5,14 +5,14 @@ class Highscore extends Component {
     super(props)
   }
   render() {
-
+    const { name, score } = this.props
     return(
-      <div className="highscore">
-        <div className="col-xs-4">
-          Points
+      <div className="highscore col-md-12">
+        <div className="col-xs-3 number">
+          {score}
         </div>
-        <div className="col-xs-8">
-          Player Name
+        <div className="col-xs-9 name">
+          {name}
         </div>
       </div>
     )

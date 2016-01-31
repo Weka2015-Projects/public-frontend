@@ -20885,7 +20885,9 @@
 	    active: false,
 	    completed: false
 	  }],
-	  score: 0
+	  id: 5,
+	  score: 0,
+	  completed: false
 	};
 	var initialContent = {
 	  active: false,
@@ -20924,7 +20926,9 @@
 	    case 'NEW_GAME':
 	      return {
 	        active: true,
-	        content: action.data
+	        content: action.data,
+	        id: action.id,
+	        highscores: action.highscores
 	      };
 	    default:
 	      return state;
@@ -20939,7 +20943,9 @@
 	      var newGame = {
 	        active: true,
 	        content: action.data,
-	        score: 0
+	        score: 0,
+	        id: action.id,
+	        status: action.status
 	      };
 	      newGame.content[0].active = true;
 	      return newGame;
@@ -20958,11 +20964,23 @@
 	      return state;
 	    case 'WIN_GAME':
 	      state.active = false;
+	      state.completed = true;
+	      state.status = "Won";
 	      return state;
 	    case 'LOSE_GAME':
+	      state.active = false;
+	      state.completed = true;
+	      state.status = "Lost";
 	      return state;
 	    case 'RESTART_GAME':
-	      return state;
+	      var replay = {
+	        active: false,
+	        content: action.data,
+	        score: 0,
+	        id: action.id,
+	        status: action.status
+	      };
+	      return replay;
 	    default:
 	      return state;
 	  }
@@ -29553,7 +29571,15 @@
 	      e.preventDefault();
 	      store.dispatch({
 	        type: 'NEW_GAME',
-	        data: ['hi', 'bob']
+	        data: ['hi', 'bob'],
+	        id: 0,
+	        highscores: [{
+	          name: 'Nilu the destroyer',
+	          score: 120
+	        }, {
+	          name: 'Last of the Brohicans',
+	          score: 20
+	        }]
 	      });
 	    }
 	  }, {
@@ -29616,7 +29642,7 @@
 	            'div',
 	            { className: 'col-md-4 scores-container' },
 	            _react2.default.createElement(_score2.default, { score: state.game.score }),
-	            _react2.default.createElement(_leaderboard2.default, null)
+	            _react2.default.createElement(_leaderboard2.default, { scores: state.loadedData.highscores })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -29661,6 +29687,10 @@
 
 	var _word2 = _interopRequireDefault(_word);
 
+	var _submitscore = __webpack_require__(243);
+
+	var _submitscore2 = _interopRequireDefault(_submitscore);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29694,7 +29724,9 @@
 	      });
 	      store.dispatch({
 	        type: 'START_GAME',
-	        data: gameArray
+	        data: gameArray,
+	        id: store.getState().loadedData.id,
+	        status: ''
 	      });
 	      document.getElementById('shooter').focus();
 	    }
@@ -29719,7 +29751,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'word-container' },
-	        !gameIsActive && contentLoaded ? startButton : words
+	        state.game.completed ? _react2.default.createElement(_submitscore2.default, { gameId: state.game.id, player: state.user.username, score: state.game.score, status: state.game.status }) : !gameIsActive && contentLoaded ? startButton : words
 	      );
 	    }
 	  }]);
@@ -29828,8 +29860,12 @@
 	  _createClass(Leaderboard, [{
 	    key: 'render',
 	    value: function render() {
-	      var scores = [];
+	      var scores = this.props.scores;
 
+	      var scoresRender = [];
+	      scores.map(function (score, index) {
+	        scoresRender.push(_react2.default.createElement(_highscore2.default, { name: score.name, score: score.score, key: index }));
+	      });
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'highscore-container' },
@@ -29838,7 +29874,7 @@
 	          null,
 	          'Highscores'
 	        ),
-	        _react2.default.createElement('div', { className: 'row' })
+	        scoresRender
 	      );
 	    }
 	  }]);
@@ -29884,19 +29920,22 @@
 	  _createClass(Highscore, [{
 	    key: "render",
 	    value: function render() {
+	      var _props = this.props;
+	      var name = _props.name;
+	      var score = _props.score;
 
 	      return _react2.default.createElement(
 	        "div",
-	        { className: "highscore" },
+	        { className: "highscore col-md-12" },
 	        _react2.default.createElement(
 	          "div",
-	          { className: "col-xs-4" },
-	          "Points"
+	          { className: "col-xs-3 number" },
+	          score
 	        ),
 	        _react2.default.createElement(
 	          "div",
-	          { className: "col-xs-8" },
-	          "Player Name"
+	          { className: "col-xs-9 name" },
+	          name
 	        )
 	      );
 	    }
@@ -29977,8 +30016,8 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'form',
-	        { className: 'shooter', onSubmit: this.checkInput.bind(this) },
-	        _react2.default.createElement('input', { id: 'shooter', placeholder: 'Just shoot it', ref: 'shooter' })
+	        { autoComplete: 'off', className: 'shooter', onSubmit: this.checkInput.bind(this) },
+	        _react2.default.createElement('input', { id: 'shooter', placeholder: 'Just shoot it', ref: 'shooter', tabIndex: '1' })
 	      );
 	    }
 	  }]);
@@ -35995,17 +36034,28 @@
 	          'div',
 	          { className: 'row' },
 	          _react2.default.createElement(
-	            'h3',
-	            null,
-	            'Sign in'
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'To save your scores'
-	          ),
-	          'Work pls',
-	          _react2.default.createElement(_login2.default, null)
+	            'div',
+	            { className: 'users' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-md-12' },
+	              _react2.default.createElement(
+	                'h2',
+	                null,
+	                'Sign in'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'Save your scores'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-md-6' },
+	              _react2.default.createElement(_login2.default, null)
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -36079,7 +36129,7 @@
 	        _react2.default.createElement('input', { ref: 'username', placeholder: 'Whatever you want' }),
 	        _react2.default.createElement(
 	          'button',
-	          { className: 'btn btn-success btn-lg' },
+	          { className: 'btn btn-success' },
 	          'Sign in'
 	        )
 	      );
@@ -46010,6 +46060,78 @@
 	return jQuery;
 	}));
 
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SubmitScore = function (_Component) {
+	  _inherits(SubmitScore, _Component);
+
+	  function SubmitScore(props) {
+	    _classCallCheck(this, SubmitScore);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(SubmitScore).call(this, props));
+	  }
+
+	  _createClass(SubmitScore, [{
+	    key: "render",
+	    value: function render() {
+	      var _props = this.props;
+	      var gameId = _props.gameId;
+	      var score = _props.score;
+	      var player = _props.player;
+	      var status = _props.status;
+
+	      console.log(player);
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "game-over" },
+	        _react2.default.createElement(
+	          "h3",
+	          { className: "status" },
+	          "You ",
+	          status,
+	          "!"
+	        ),
+	        _react2.default.createElement(
+	          "h4",
+	          { className: "score" },
+	          score
+	        ),
+	        _react2.default.createElement(
+	          "button",
+	          { className: "btn" },
+	          "Submit your score?"
+	        )
+	      );
+	    }
+	  }]);
+
+	  return SubmitScore;
+	}(_react.Component);
+
+	exports.default = SubmitScore;
 
 /***/ }
 /******/ ]);

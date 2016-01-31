@@ -3,6 +3,44 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+.navbar {
+  background-color: #c0392b;
+  border-radius: 0px;
+  height: 65px;
+}
+.navbar .navbar-brand {
+  color: white;
+  line-height: 3rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.navbar .welcome {
+  line-height: 3rem;
+  color: white;
+  float: right;
+  padding: 15px;
+}
+.navbar .welcome button {
+  margin-left: 15px;
+  background-color: #e67e22;
+  border: none;
+}
+.navbar .welcome button:hover {
+  background-color: #d35400;
+}
+.navbar .signin {
+  line-height: 3rem;
+  float: right;
+  padding: 15px;
+}
+.navbar .signin button {
+  background-color: #e67e22;
+  border: none;
+}
+.navbar .signin button:hover {
+  background-color: #d35400;
+}
+
 .game-container .word-container {
   overflow: hidden;
   position: relative;
@@ -18,15 +56,38 @@ body {
   transition: all 10s linear;
 }
 .game-container .word-container .translate {
-  top: -100px;
+  top: -25px;
   position: relative;
 }
 .game-container .word-container .btn {
   position: relative;
   top: 45%;
-  width: 100px;
+  width: 200px;
+  font-size: 3rem;
   margin: auto;
   display: block;
+  background-color: #e67e22;
+  border: none;
+}
+.game-container .word-container .btn:hover {
+  background-color: #d35400;
+}
+.game-container .word-container .game-over {
+  width: 50%;
+  display: block;
+  margin: 150px auto;
+}
+.game-container .word-container .game-over .status {
+  font-size: 5rem;
+  text-align: center;
+}
+.game-container .word-container .game-over .score {
+  text-align: center;
+  font-size: 7rem;
+}
+.game-container .word-container .game-over .btn {
+  font-size: 2rem;
+  color: white;
 }
 .game-container .shooter {
   width: 100%;
@@ -43,12 +104,79 @@ body {
 }
 
 .scores-container .score {
+  margin: 50px 0;
   width: 100%;
   font-size: 5rem;
   text-align: center;
 }
 .scores-container .highscore-container h4 {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  line-height: 4rem;
+  background-color: #c0392b;
+  color: white;
   text-align: center;
+  margin-bottom: 0px;
+}
+.scores-container .highscore-container .highscore {
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+}
+.scores-container .highscore-container .highscore .name {
+  font-size: 2rem;
+  line-height: 3rem;
+}
+.scores-container .highscore-container .highscore .number {
+  text-align: center;
+  font-size: 2.5rem;
+}
+.scores-container .highscore-container .highscore:nth-child(2n) {
+  background-color: #eee;
+}
+
+.actions-container .btn {
+  width: 200px;
+  font-size: 3rem;
+  margin: 50px auto 0 auto;
+  display: block;
+  background-color: #e67e22;
+  border: none;
+}
+.actions-container .btn:hover {
+  background-color: #d35400;
+}
+
+/* Sign in page */
+.users h2 {
+  font-size: 4rem;
+}
+.users p {
+  font-size: 1.8rem;
+}
+.users .sign-in label {
+  font-size: 1.8rem;
+  line-height: 3rem;
+  font-weight: bold;
+  display: block;
+}
+.users .sign-in input {
+  width: 50%;
+  line-height: 3rem;
+  display: block;
+  text-align: center;
+}
+.users .sign-in button {
+  width: 50%;
+  margin-top: 15px;
+  line-height: 2.5rem;
+  display: block;
+  background-color: #e67e22;
+  border: none;
+}
+.users .sign-in button:hover {
+  background-color: #d35400;
 }
 
 /*# sourceMappingURL=main.css.map */

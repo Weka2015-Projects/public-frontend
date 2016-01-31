@@ -18,7 +18,7 @@ class Login extends Component {
       <form className="sign-in" onSubmit={this.handleSubmit.bind(this)}>
         <label>Username</label>
         <input ref="username" placeholder="Whatever you want"></input>
-        <button className="btn btn-success btn-lg">Sign in</button>
+        <button className="btn btn-success">Sign in</button>
       </form>
     )
   }

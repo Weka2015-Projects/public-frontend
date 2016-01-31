@@ -9,10 +9,15 @@ class Users extends Component {
     return(
       <div className="container">
         <div className="row">
-          <h3>Sign in</h3>
-          <p>To save your scores</p>
-          Work pls
-          <Login />
+          <div className="users">
+            <div className="col-md-12">
+              <h2>Sign in</h2>
+              <p>Save your scores</p>
+            </div>
+            <div className="col-md-6">
+              <Login />
+            </div>
+          </div>
         </div>
       </div>
     )

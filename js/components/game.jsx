@@ -14,7 +14,17 @@ class Game extends Component {
     e.preventDefault()
     store.dispatch({
       type:'NEW_GAME',
-      data:['hi', 'bob']
+      data:['hi', 'bob'],
+      id: 0,
+      highscores: [{
+        name: 'Nilu the destroyer',
+        score: 120
+      },
+      {
+        name: 'Last of the Brohicans',
+        score: 20
+      }
+    ]
     })
   }
   restartGame(e){
@@ -51,7 +61,7 @@ class Game extends Component {
           </div>
           <div className="col-md-4 scores-container">
             <Score score={state.game.score}/>
-            <Leaderboard />
+            <Leaderboard scores={state.loadedData.highscores}/>
           </div>
         </div>
         <div className="row">

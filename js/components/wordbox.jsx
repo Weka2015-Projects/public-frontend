@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Word from './word.jsx'
+import SubmitScore from './submitscore.jsx'
 
 class WordBox extends Component {
   constructor (props) {
@@ -19,7 +20,9 @@ class WordBox extends Component {
     })
     store.dispatch({
       type: 'START_GAME',
-      data: gameArray
+      data: gameArray,
+      id: store.getState().loadedData.id,
+      status: ''
     })
     document.getElementById('shooter').focus()
   }
@@ -36,7 +39,7 @@ class WordBox extends Component {
     })
     return(
       <div className="word-container">
-        { !gameIsActive && contentLoaded ? startButton : words}
+        { state.game.completed ? <SubmitScore gameId={state.game.id} player={state.user.username} score={state.game.score} status={state.game.status}  /> : !gameIsActive && contentLoaded ? startButton : words }
       </div>
     )
   }

@@ -10,7 +10,9 @@ const initialGame = {
       completed: false
     }
   ],
-  score: 0
+  id: 5,
+  score: 0,
+  completed: false
 }
 const initialContent = {
   active: false,
@@ -44,7 +46,9 @@ const loadedData = (state = initialContent, action) => {
     case 'NEW_GAME':
       return {
         active: true,
-        content: action.data
+        content: action.data,
+        id: action.id,
+        highscores: action.highscores
       }
     default:
       return state
@@ -56,7 +60,9 @@ const game = (state = initialGame, action) => {
       const newGame = {
           active: true,
           content: action.data,
-          score: 0
+          score: 0,
+          id: action.id,
+          status: action.status
         }
       newGame.content[0].active = true
       return newGame
@@ -75,11 +81,23 @@ const game = (state = initialGame, action) => {
       return state
     case 'WIN_GAME':
       state.active = false
+      state.completed = true
+      state.status = "Won"
       return state
     case 'LOSE_GAME':
+      state.active = false
+      state.completed = true
+      state.status = "Lost"
       return state
     case 'RESTART_GAME':
-      return state
+      const replay = {
+          active: false,
+          content: action.data,
+          score: 0,
+          id: action.id,
+          status: action.status
+        }
+      return replay
     default:
       return state
   }

@@ -26,8 +26,8 @@ class Textshooter extends Component {
   }
   render() {
     return(
-      <form className="shooter" onSubmit={this.checkInput.bind(this)}>
-        <input id="shooter" placeholder="Just shoot it" ref="shooter"></input>
+      <form autoComplete="off" className="shooter" onSubmit={this.checkInput.bind(this)}>
+        <input id="shooter" placeholder="Just shoot it" ref="shooter" tabIndex="1"></input>
       </form>
     )
   }
