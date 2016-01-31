@@ -24,7 +24,7 @@ class Nav extends Component {
       <div className="navbar">
         <div className="container">
           <div className="navbar-brand">
-            Text Invaders
+            <Link to="/">Text Invaders</Link>
           </div>
           <div>
             {state.user.active ? welcome : signin }

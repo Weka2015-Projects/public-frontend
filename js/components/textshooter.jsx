@@ -22,7 +22,6 @@ class Textshooter extends Component {
         word: input
       })
     }
-    console.log(allWords)
   }
   render() {
     return(

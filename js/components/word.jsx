@@ -17,8 +17,11 @@ class Word extends Component {
       duration: 0,
       easing: 'linear'
     })
-  if(time === 7 && active) {
+   if(time === 7 && active) {
       this.interval = setInterval(this.tick.bind(this), 1000)
+    }
+      if(!active) {
+      clearInterval(this.interval)
     }
   }
   componentDidUpdate() {
@@ -37,6 +40,9 @@ class Word extends Component {
       clearInterval(this.interval)
     }
 
+  }
+  componentWillUnmount(){
+    clearInterval(this.interval)
   }
   tick() {
     const { time } = this.state

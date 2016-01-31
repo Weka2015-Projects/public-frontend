@@ -12,7 +12,6 @@ class Users extends Component {
           <div className="users">
             <div className="col-md-12">
               <h2>Sign in</h2>
-              <p>Save your scores</p>
             </div>
             <div className="col-md-6">
               <Login />

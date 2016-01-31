@@ -9,10 +9,19 @@ body {
   height: 65px;
 }
 .navbar .navbar-brand {
-  color: white;
   line-height: 3rem;
   font-size: 2rem;
   font-weight: bold;
+}
+.navbar .navbar-brand a {
+  color: white;
+}
+.navbar .navbar-brand a:hover {
+  color: white;
+  text-decoration: none;
+}
+.navbar .navbar-brand a:active, .navbar .navbar-brand a:focus {
+  text-decoration: none;
 }
 .navbar .welcome {
   line-height: 3rem;

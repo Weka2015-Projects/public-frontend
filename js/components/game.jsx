@@ -23,7 +23,9 @@ class Game extends Component {
       {
         name: 'Last of the Brohicans',
         score: 20
-      }
+      },
+      { name: 'Broseidon',
+      score: 5}
     ]
     })
   }

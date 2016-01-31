@@ -29579,7 +29579,8 @@
 	        }, {
 	          name: 'Last of the Brohicans',
 	          score: 20
-	        }]
+	        }, { name: 'Broseidon',
+	          score: 5 }]
 	      });
 	    }
 	  }, {
@@ -30009,7 +30010,6 @@
 	          word: input
 	        });
 	      }
-	      console.log(allWords);
 	    }
 	  }, {
 	    key: 'render',
@@ -30116,7 +30116,11 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'navbar-brand' },
-	            'Text Invaders'
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/' },
+	              'Text Invaders'
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -36043,11 +36047,6 @@
 	                'h2',
 	                null,
 	                'Sign in'
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'Save your scores'
 	              )
 	            ),
 	            _react2.default.createElement(
@@ -36201,6 +36200,9 @@
 	      if (time === 7 && active) {
 	        this.interval = setInterval(this.tick.bind(this), 1000);
 	      }
+	      if (!active) {
+	        clearInterval(this.interval);
+	      }
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
@@ -36220,6 +36222,11 @@
 	      if (!active) {
 	        clearInterval(this.interval);
 	      }
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      clearInterval(this.interval);
 	    }
 	  }, {
 	    key: 'tick',
