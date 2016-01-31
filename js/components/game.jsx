@@ -3,6 +3,7 @@ import WordBox from './wordbox.jsx'
 import Score from './score.jsx'
 import Leaderboard from './leaderboard.jsx'
 import Textshooter from './textshooter.jsx'
+import R from 'ramda'
 
 class Game extends Component {
   constructor (props, context) {
@@ -13,7 +14,7 @@ class Game extends Component {
     e.preventDefault()
     store.dispatch({
       type:'NEW_GAME',
-      content:['hi', 'bob']
+      data:['hi', 'bob']
     })
   }
   restartGame(e){
@@ -23,6 +24,19 @@ class Game extends Component {
       type:'RESTART_GAME'
     })
   }
+  componentWillUpdate() {
+    const { store } = this.context
+    const state = store.getState()
+    if (state.game.active) {
+      const remainingWords = R.filter((word) => word.completed === false, state.game.content)
+      if (remainingWords.length === 0) {
+        store.dispatch({
+          type: 'WIN_GAME'
+        })
+      console.log('You win')
+      }
+    }
+  }
   render() {
     const { store } = this.context
     const state = store.getState()
@@ -31,18 +45,18 @@ class Game extends Component {
     return(
       <div className="container">
         <div className="row">
-          <div className="col-md-8">
+          <div className="col-md-8 game-container">
             <WordBox />
             <Textshooter />
           </div>
-          <div className="col-md-4">
-            <Score />
+          <div className="col-md-4 scores-container">
+            <Score score={state.game.score}/>
             <Leaderboard />
           </div>
         </div>
         <div className="row">
-          <div className="col-md-8">
-            { !state.content.active ? loadGame : restartGame }
+          <div className="col-md-8 actions-container">
+            { !state.loadedData.active ? loadGame : restartGame }
           </div>
         </div>
       </div>

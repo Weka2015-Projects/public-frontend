@@ -3,4 +3,52 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+.game-container .word-container {
+  overflow: hidden;
+  position: relative;
+  height: 500px;
+  border: 1px solid black;
+  border-bottom: none;
+}
+.game-container .word-container .word {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  transition: all 10s linear;
+}
+.game-container .word-container .translate {
+  top: -100px;
+  position: relative;
+}
+.game-container .word-container .btn {
+  position: relative;
+  top: 45%;
+  width: 100px;
+  margin: auto;
+  display: block;
+}
+.game-container .shooter {
+  width: 100%;
+}
+.game-container .shooter input {
+  width: 100%;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 4rem;
+  font-size: 2rem;
+}
+.game-container .shooter input:focus {
+  outline: none;
+}
+
+.scores-container .score {
+  width: 100%;
+  font-size: 5rem;
+  text-align: center;
+}
+.scores-container .highscore-container h4 {
+  text-align: center;
+}
+
 /*# sourceMappingURL=main.css.map */

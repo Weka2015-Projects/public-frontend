@@ -7,7 +7,7 @@ class Highscore extends Component {
   render() {
 
     return(
-      <div className="row">
+      <div className="highscore">
         <div className="col-xs-4">
           Points
         </div>

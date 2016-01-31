@@ -16,8 +16,8 @@ class Nav extends Component {
   render() {
     const { store } = this.context
     const state = store.getState()
-    const welcome =  <div className="welcome"> Welcome {state.user.username} <button onClick={this.signOut.bind(this)} className="btn btn-success">Sign Out</button></div>
-    const signin =   <Link to="/users"><button className="btn btn-success">Sign In</button></Link>
+    const welcome = <div className="welcome"> Welcome {state.user.username} <button onClick={this.signOut.bind(this)} className="btn btn-success">Sign Out</button></div>
+    const signin = <div className="signin"><Link to="/users"><button className="btn btn-success">Sign In</button></Link></div>
 
 
     return(
